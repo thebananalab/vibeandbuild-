@@ -178,10 +178,21 @@ footer a{color:var(--red);text-decoration:none;}
 @media(max-width:900px){
   .wgrid,.bgrid{grid-template-columns:1fr 1fr;}
   .sgrid{grid-template-columns:1fr 1fr;}
-  .pgrid{grid-template-columns:1fr;max-width:360px;}
   .mod{grid-template-columns:50px 1fr;}
   .mtime{display:none;}
   .s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8,.s9,.s10,.s11,.s12,.s13,.s14{display:none;}
+}
+@media(max-width:600px){
+  .wgrid,.bgrid,.sgrid{grid-template-columns:1fr;}
+  .wcard{border-right:none!important;border-bottom:2.5px solid var(--black);}
+  .hero-title{font-size:clamp(4.5rem,22vw,7rem);}
+  nav{padding:.7rem 1rem;}
+  .nlogo{font-size:1.4rem;}
+  .ncta{font-size:.62rem;padding:.45rem .9rem;}
+  .hero-sub p{font-size:.75rem;}
+  .btn-h{font-size:.72rem;padding:.75rem 1.3rem;}
+  .sec{padding:3rem 1rem;}
+  .stitle{font-size:clamp(2.4rem,10vw,3.5rem);}
 }
 </style>
 </head>
@@ -325,24 +336,45 @@ footer a{color:var(--red);text-decoration:none;}
 </div></section>
 
 <!-- PRICING — gold -->
-<section class="sec price" id="pricing"><div class="si">
-  <div class="slbl" style="background:var(--red);color:var(--white);">Precio</div>
-  <h2 class="stitle" style="color:var(--black)">UN LUGAR.<br>UN PRECIO.</h2>
-  <div style="max-width:420px;">
-    <div class="pcard" style="background:var(--black);color:var(--white);box-shadow:7px 7px 0 var(--red);">
-      <div class="ptier" style="color:var(--gold);">Workshop completo</div>
-      <div class="pnum" style="color:var(--white);font-size:6rem;line-height:1;"><span>€</span>35</div>
-      <p class="pper" style="color:rgba(245,240,232,.5);">Pago único · Sin sorpresas</p>
-      <ul class="pfeats" style="margin-bottom:1.8rem;">
-        <li style="color:var(--cream);">3.5h de workshop en vivo</li>
-        <li style="color:var(--cream);">Construyes tu propia tool ese mismo día</li>
-        <li style="color:var(--cream);">Tu tool publicada con link real</li>
-        <li style="color:var(--cream);">Atención personalizada por WhatsApp durante 1 mes para resolver dudas</li>
-      </ul>
-      <a href="#" class="bprice" style="background:var(--red);color:var(--white);border:2.5px solid var(--red);box-shadow:5px 5px 0 var(--gold);font-size:.8rem;display:block;text-align:center;padding:.85rem;font-family:Space Mono,monospace;font-weight:700;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;cursor:none;">Reservar mi lugar — €35 →</a>
+<section id="pricing" style="background:var(--gold);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;width:100%;">
+    <div style="background:var(--black);color:var(--white);border:2.5px solid var(--black);padding:0;display:grid;grid-template-columns:1fr 1fr;min-height:420px;box-shadow:8px 8px 0 var(--black);">
+
+      <!-- Left — big price -->
+      <div style="background:var(--red);padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:space-between;border-right:2.5px solid var(--black);">
+        <div>
+          <div style="display:inline-block;background:var(--black);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.15em;padding:.3rem 1rem;margin-bottom:1.5rem;">PRECIO</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,12vw,10rem);line-height:.9;color:var(--white);">€35</div>
+          <div style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;">Pago único · Sin sorpresas</div>
+        </div>
+        <a href="#" style="background:var(--black);color:var(--gold);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1rem 1.5rem;border:2.5px solid var(--black);box-shadow:5px 5px 0 var(--gold);text-decoration:none;display:inline-block;margin-top:2rem;cursor:none;transition:transform .1s,box-shadow .1s;">Reservar mi lugar →</a>
+      </div>
+
+      <!-- Right — what's included -->
+      <div style="padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:.05em;margin-bottom:1.8rem;">QUÉ INCLUYE</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:1.1rem;">
+          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
+            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
+            3.5 horas de workshop en vivo
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
+            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
+            Construyes tu propia tool ese mismo día
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
+            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
+            Tu tool publicada con link real
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
+            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
+            Atención personalizada por WhatsApp durante 1 mes
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div></section>
+</section>
 
 <!-- FAQ — black -->
 <section class="sec faq"><div class="si">
