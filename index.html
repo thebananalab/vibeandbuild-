@@ -3,409 +3,743 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vibe & Build</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Vibe & Bloom — Tu idea, tu app, tu vibe</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --red:#FF5B22;
-  --arctic:#AEE6ED;
-  --blue:#3939FF;
-  --purple:#DBB8FF;
-  --gold:#F2BB05;
+  
+  --pink:#FF99DC;
+  --purple:#826DEE;
+  --lime:#D8F382;
+  --black:#1C1C1C;
   --cream:#F5F0E8;
-  --black:#1A1008;
   --white:#FFFFFF;
+  --gray:#8A8A8A;
+  --light:#EEECE7;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:16px;height:16px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:multiply;}
+body{background:var(--cream);color:var(--black);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+#cur{position:fixed;width:12px;height:12px;background:var(--purple);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,width .15s,height .15s;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--cream);border-bottom:2.5px solid var(--black);padding:.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-.nlogo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--black);text-decoration:none;letter-spacing:.05em;}
-.nlogo b{color:var(--red);}
-.ncta{background:var(--red);color:var(--white);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.5rem 1.3rem;border:2.5px solid var(--black);box-shadow:3px 3px 0 var(--black);text-decoration:none;cursor:none;transition:transform .1s,box-shadow .1s;}
-.ncta:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--black);}
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(245,240,232,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(28,28,28,.08);
+  padding:1rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nlogo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:.08em;
+  color:var(--black);text-decoration:none;
+}
+.nlogo span{color:var(--purple);}
+.ncta{
+  background:var(--black);color:var(--cream);
+  font-size:.72rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.12em;
+  padding:.55rem 1.4rem;border-radius:999px;
+  text-decoration:none;cursor:none;
+  transition:background .2s,transform .15s;
+}
+.ncta:hover{background:var(--purple);transform:translateY(-1px);}
 
-/* ══ HERO ══ cream bg, chaos stickers */
-.hero{min-height:100vh;background:var(--cream);padding-top:72px;position:relative;overflow:hidden;border-bottom:3px solid var(--black);}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,17vw,14rem);line-height:.88;color:var(--black);padding:1rem 2rem 0;position:relative;z-index:1;letter-spacing:.02em;}
-.hero-title .r{color:var(--red);}
-.hero-title .b{color:var(--blue);}
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  padding:100px 2.5rem 2.5rem;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:1fr auto;
+  gap:1rem;
+  max-width:1300px;
+  margin:0 auto;
+}
 
-/* sticker system */
-.sl{position:absolute;z-index:10;}
-.sk{font-family:'Bebas Neue',sans-serif;border:2.5px solid var(--black);display:inline-flex;align-items:center;justify-content:center;text-align:center;}
-.pill{border-radius:999px;padding:.42rem 1.1rem;font-size:.88rem;letter-spacing:.06em;}
-.rect{padding:.5rem 1rem;font-size:.95rem;letter-spacing:.05em;line-height:1.1;}
-.big{font-size:1.7rem;padding:.6rem 1.2rem;letter-spacing:.03em;line-height:1.1;}
-.xl{font-size:2.6rem;padding:.7rem 1.3rem;letter-spacing:.02em;line-height:1;}
-.circ{border-radius:50%;width:108px;height:108px;font-size:.62rem;font-family:'Space Mono',monospace;font-weight:700;line-height:1.35;text-transform:uppercase;letter-spacing:.04em;}
-.dash{border-style:dashed!important;}
+.hero-card{border-radius:20px;padding:2rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
 
-/* positions */
-.s1{top:90px;right:4%;transform:rotate(3deg);}
-.s2{top:140px;right:23%;transform:rotate(-5deg);}
-.s3{top:225px;right:8%;transform:rotate(7deg);}
-.s4{top:82px;right:38%;transform:rotate(-2deg);}
-.s5{top:325px;right:3%;transform:rotate(4deg);}
-.s6{top:295px;right:26%;transform:rotate(-6deg);}
-.s7{top:440px;right:12%;transform:rotate(2deg);}
-.s8{top:415px;right:36%;transform:rotate(-3deg);}
-.s9{top:540px;right:5%;transform:rotate(5deg);}
-.s10{top:515px;right:28%;transform:rotate(-4deg);}
-.s11{top:620px;right:15%;transform:rotate(6deg);}
-.s12{top:575px;right:42%;transform:rotate(-7deg);}
-.s13{top:695px;right:4%;transform:rotate(3deg);}
-.s14{top:675px;right:31%;transform:rotate(-2deg);}
-.s15{top:190px;left:3%;transform:rotate(-4deg);}
-.s16{top:365px;left:2%;transform:rotate(5deg);}
+/* Card 1 — big purple title */
+.hc1{
+  grid-column:1/3;grid-row:1/2;
+  background:var(--purple);
+  min-height:340px;
+}
+.hc1 h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,8vw,7.5rem);
+  line-height:.88;letter-spacing:.02em;
+  color:var(--white);
+  margin-top:1rem;
+}
+.hc1 h1 em{color:var(--lime);font-style:normal;}
+.hc1 p{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:400px;margin-top:.8rem;}
 
-.hero-sub{position:relative;z-index:15;padding:.5rem 2rem 0;max-width:460px;}
-.hero-sub p{font-size:.78rem;color:var(--black);line-height:1.75;font-weight:700;opacity:.75;}
-.hero-ctas{padding:.9rem 2rem 0;position:relative;z-index:15;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
-.btn-h{background:var(--red);color:var(--white);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.85rem 1.8rem;border:2.5px solid var(--black);box-shadow:5px 5px 0 var(--black);text-decoration:none;cursor:none;transition:transform .1s,box-shadow .1s;}
-.btn-h:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--black);}
-.ptag{background:var(--gold);color:var(--black);font-size:.68rem;font-weight:700;padding:.4rem .9rem;border:2px solid var(--black);font-family:'Space Mono',monospace;text-transform:uppercase;box-shadow:3px 3px 0 var(--black);}
+/* Card 2 — cream date */
+.hc2{
+  grid-column:3/4;grid-row:1/2;
+  background:var(--white);
+  border:1px solid rgba(28,28,28,.08);
+  min-height:340px;
+}
+.hc2-date{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;line-height:.88;color:var(--black);letter-spacing:.02em;}
+.hc2-sub{font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:.12em;margin-top:.5rem;}
+.hc2-pill{
+  display:inline-block;
+  background:var(--pink);color:var(--black);
+  font-size:.68rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:.35rem .9rem;border-radius:999px;
+}
 
-.hero-bar{background:var(--black);padding:.7rem 2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;position:relative;z-index:20;margin-top:1rem;}
-.hbi{font-size:.68rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.1em;}
-.hbd{color:var(--red);font-size:.9rem;}
+/* Card 3 — red sin código */
+.hc3{
+  grid-column:1/2;grid-row:2/3;
+  background:var(--purple);
+  min-height:200px;
+}
+.hc3 h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:.9;color:var(--white);}
+.hc3 p{font-size:.75rem;color:rgba(255,255,255,.7);margin-top:.5rem;line-height:1.5;}
 
-/* MARQUEE */
-.mq{background:var(--red);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);padding:.6rem 0;overflow:hidden;white-space:nowrap;}
-.mqi{display:inline-block;animation:mq 18s linear infinite;}
-.mqi span{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.12em;color:var(--cream);margin:0 1.2rem;}
-.mqi span.dot{color:var(--gold);}
+/* Card 4 — cream stack */
+.hc4{
+  grid-column:2/3;grid-row:2/3;
+  background:var(--light);
+  min-height:200px;
+}
+.hc4-label{font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);margin-bottom:1rem;}
+.hc4-tool{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem;letter-spacing:.06em;
+  color:var(--black);
+  padding:.3rem 0;
+  border-bottom:1px solid rgba(28,28,28,.08);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.hc4-tool:last-child{border-bottom:none;}
+.hc4-dot{width:7px;height:7px;border-radius:50%;background:var(--purple);}
+
+/* Card 5 — black CTA */
+.hc5{
+  grid-column:3/4;grid-row:2/3;
+  background:var(--black);
+  min-height:200px;
+}
+.hc5-price{font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;color:var(--white);}
+.hc5-sub{font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem;}
+.hc5-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--lime);color:var(--black);
+  font-size:.72rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:.7rem 1rem .7rem 1.2rem;
+  border-radius:999px;text-decoration:none;cursor:none;
+  transition:opacity .2s;
+}
+.hc5-btn:hover{opacity:.85;}
+.hc5-arrow{
+  background:var(--black);color:var(--lime);
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
+}
+
+/* ── MARQUEE ─────────────────────────────────────────────────── */
+.mq{
+  background:var(--black);
+  padding:.65rem 0;overflow:hidden;white-space:nowrap;
+  margin:0;
+}
+.mqi{display:inline-block;animation:mq 20s linear infinite;}
+.mqi span{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.15em;color:var(--cream);margin:0 1.5rem;}
+.mqi span.dot{color:var(--purple);}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* SECTIONS */
-.sec{padding:4.5rem 2rem;position:relative;overflow:hidden;}
-.si{max-width:1100px;margin:0 auto;}
-.slbl{display:inline-block;background:var(--black);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.15em;padding:.3rem 1rem;margin-bottom:.8rem;}
-.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5.5rem);line-height:.92;letter-spacing:.02em;margin-bottom:2.5rem;}
+/* ── SECTIONS ────────────────────────────────────────────────── */
+.sec{padding:6rem 2.5rem;max-width:1300px;margin:0 auto;}
+.sec-full{padding:6rem 2.5rem;background:var(--cream);}
+.sec-full .inner{max-width:1300px;margin:0 auto;}
 
-/* WHO — arctic bg */
-.who{background:var(--arctic);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);}
-.wgrid{display:grid;grid-template-columns:repeat(4,1fr);border:2.5px solid var(--black);}
-.wcard{padding:1.6rem 1.2rem;border-right:2.5px solid var(--black);background:transparent;transition:background .15s;cursor:none;position:relative;}
-.wcard:last-child{border-right:none;}
-.wcard:hover{background:var(--red);}
-.wcard:hover .wname,.wcard:hover .wdesc{color:var(--white)!important;}
-.wemoji{font-size:2rem;display:block;margin-bottom:.7rem;}
-.wname{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.04em;margin-bottom:.4rem;color:var(--black);}
-.wdesc{font-size:.72rem;line-height:1.6;color:rgba(26,16,8,.6);}
+.sec-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);
+  margin-bottom:1.2rem;
+}
+.sec-label::before{content:'';display:inline-block;width:20px;height:1.5px;background:var(--purple);}
 
-/* BUILD — blue bg */
-.build{background:var(--blue);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);}
-.bgrid{display:grid;grid-template-columns:repeat(3,1fr);border:2.5px solid var(--black);border-bottom:none;}
-.bitem{padding:1.6rem;border-right:2.5px solid var(--black);border-bottom:2.5px solid var(--black);position:relative;overflow:hidden;transition:background .15s;cursor:none;}
-.bitem:nth-child(3n){border-right:none;}
-.bitem:hover{background:rgba(255,255,255,.08);}
-.bnum{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(255,255,255,.1);line-height:1;margin-bottom:.2rem;}
-.bname{font-size:.88rem;font-weight:700;color:var(--gold);margin-bottom:.35rem;}
-.bdesc{font-size:.75rem;color:rgba(255,255,255,.65);line-height:1.6;}
-.bsk{position:absolute;font-family:'Bebas Neue',sans-serif;border:2px solid var(--black);padding:.28rem .65rem;font-size:.75rem;z-index:5;}
+.sec-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,5rem);
+  line-height:.92;letter-spacing:.02em;
+  color:var(--black);
+  margin-bottom:3rem;
+}
+.sec-title em{font-style:normal;color:var(--purple);}
 
-/* STACK — cream bg */
-.stack{background:var(--cream);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);}
-.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
-.scard{border:2.5px solid var(--black);padding:1.4rem 1rem;box-shadow:5px 5px 0 var(--black);transition:transform .1s,box-shadow .1s;cursor:none;}
-.scard:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--black);}
-.sname{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.04em;margin-bottom:.3rem;}
-.sbadge{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.2rem .6rem;border:2px solid var(--black);margin-bottom:.6rem;font-family:'Space Mono',monospace;}
-.sdesc{font-size:.75rem;line-height:1.6;}
+/* ── WHO ─────────────────────────────────────────────────────── */
+.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(28,28,28,.08);}
+.who-card{
+  background:var(--cream);
+  padding:2rem 1.5rem;
+  transition:background .2s;cursor:none;
+}
+.who-card:hover{background:var(--white);}
+.who-icon{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;margin-bottom:1.2rem;
+}
+.who-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.04em;margin-bottom:.6rem;}
+.who-desc{font-size:.82rem;color:var(--gray);line-height:1.65;}
 
-/* CURRICULUM — purple bg */
-.curr{background:var(--purple);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);}
-.mods{border:2.5px solid var(--black);}
-.mod{display:grid;grid-template-columns:60px 1fr 70px;gap:1rem;padding:1.4rem 1.6rem;border-bottom:2px solid rgba(26,16,8,.15);transition:background .15s;}
+/* ── BUILD ───────────────────────────────────────────────────── */
+.build-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.build-card{
+  background:var(--white);
+  border-radius:16px;
+  padding:1.8rem;
+  border:1px solid rgba(28,28,28,.06);
+  transition:transform .2s,box-shadow .2s;
+  cursor:none;position:relative;overflow:hidden;
+}
+.build-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(28,28,28,.08);}
+.build-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:rgba(28,28,28,.06);line-height:1;margin-bottom:.3rem;}
+.build-tag{
+  display:inline-block;
+  font-size:.62rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+  padding:.25rem .7rem;border-radius:999px;margin-bottom:.8rem;
+}
+.build-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;margin-bottom:.4rem;}
+.build-desc{font-size:.8rem;color:var(--gray);line-height:1.6;}
+.build-accent{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+}
+
+/* ── STACK ───────────────────────────────────────────────────── */
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.stack-card{
+  background:var(--white);border-radius:16px;
+  padding:1.8rem 1.5rem;
+  border:1px solid rgba(28,28,28,.06);
+  transition:transform .2s,box-shadow .2s;cursor:none;
+}
+.stack-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(28,28,28,.07);}
+.stack-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:1rem;
+}
+.stack-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;margin-bottom:.3rem;}
+.stack-badge{
+  display:inline-block;font-size:.6rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:.22rem .65rem;border-radius:999px;margin-bottom:.7rem;
+}
+.stack-desc{font-size:.78rem;color:var(--gray);line-height:1.6;}
+
+/* ── CURRICULUM ──────────────────────────────────────────────── */
+.curr-wrap{background:var(--black);border-radius:24px;overflow:hidden;}
+.mod{
+  display:grid;grid-template-columns:56px 1fr 70px;
+  gap:1rem;padding:1.6rem 2rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .15s;
+}
 .mod:last-child{border-bottom:none;}
-.mod:hover{background:rgba(255,255,255,.3);}
-.mnum{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--red);line-height:1;}
-.mtitle{font-size:.92rem;font-weight:700;color:var(--black);margin-bottom:.25rem;}
-.mdesc{font-size:.75rem;color:rgba(26,16,8,.6);line-height:1.6;}
-.mpills{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;}
-.mpill{background:var(--blue);color:var(--white);font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.18rem .5rem;}
-.mbrk{background:rgba(255,255,255,.25);}
-.mbrk .mnum{color:var(--red);font-size:2rem;}
-.mtime{font-size:.7rem;font-weight:700;color:var(--black);text-align:right;padding-top:.3rem;letter-spacing:.05em;opacity:.5;}
+.mod:hover{background:rgba(255,255,255,.03);}
+.mnum{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--purple);line-height:1;}
+.mtitle{font-size:.92rem;font-weight:500;color:var(--white);margin-bottom:.3rem;}
+.mdesc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;}
+.mpills{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem;}
+.mpill{
+  font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;
+  padding:.2rem .55rem;border-radius:999px;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);
+}
+.mbrk{background:rgba(216,243,130,.04);}
+.mbrk .mnum{font-size:1.6rem;}
+.mbrk .mtitle{color:var(--lime);}
+.mtime{font-size:.68rem;font-weight:500;color:rgba(255,255,255,.25);text-align:right;padding-top:.3rem;text-transform:uppercase;letter-spacing:.08em;}
 
-/* PRICING — gold bg */
-.price{background:var(--gold);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:680px;}
-.pcard{background:var(--cream);border:2.5px solid var(--black);padding:2rem 1.8rem;box-shadow:6px 6px 0 var(--black);position:relative;}
-.pcard.feat{background:var(--red);color:var(--white);box-shadow:6px 6px 0 var(--black);}
-.pbadge{position:absolute;top:-13px;left:1.4rem;background:var(--black);color:var(--gold);font-size:.65rem;font-weight:700;padding:.25rem .8rem;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.08em;}
-.ptier{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:.7rem;}
-.pnum{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;line-height:1;margin-bottom:.2rem;}
-.pnum span{font-size:1.5rem;}
-.pper{font-size:.73rem;opacity:.5;margin-bottom:1.1rem;}
-.pfeats{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.6rem;}
-.pfeats li{font-size:.78rem;line-height:1.4;display:flex;align-items:flex-start;gap:.5rem;}
-.pfeats li::before{content:"→";color:var(--red);font-weight:700;flex-shrink:0;}
-.pcard.feat .pfeats li::before{color:var(--gold);}
-.bprice{width:100%;padding:.8rem;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;cursor:none;text-decoration:none;display:block;text-align:center;border:2.5px solid var(--black);transition:transform .1s,box-shadow .1s;}
-.bprice:hover{transform:translate(-2px,-2px);}
-.bprice.bk{background:var(--black);color:var(--cream);box-shadow:4px 4px 0 var(--red);}
-.bprice.wh{background:var(--cream);color:var(--black);box-shadow:4px 4px 0 var(--gold);}
+/* ── PRICING ─────────────────────────────────────────────────── */
+.price-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1rem;
+  background:var(--purple);
+  border-radius:24px;
+  overflow:hidden;
+  min-height:420px;
+}
+.price-left{
+  padding:3.5rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.price-amount{font-family:'Bebas Neue',sans-serif;font-size:7rem;line-height:.88;color:var(--white);letter-spacing:.02em;}
+.price-sub{font-size:.78rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-top:.5rem;}
+.price-btn{
+  display:inline-flex;align-items:center;justify-content:space-between;
+  background:var(--lime);color:var(--black);
+  font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+  padding:.85rem 1rem .85rem 1.5rem;border-radius:999px;
+  text-decoration:none;cursor:none;margin-top:2.5rem;
+  transition:opacity .2s,transform .15s;max-width:280px;
+}
+.price-btn:hover{opacity:.9;transform:translateY(-1px);}
+.price-arrow{background:var(--black);color:var(--lime);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+.price-right{
+  background:rgba(255,255,255,.07);
+  padding:3.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:1.4rem;
+}
+.price-item{display:flex;align-items:flex-start;gap:1rem;}
+.price-item-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);flex-shrink:0;margin-top:.35rem;}
+.price-item-text{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.5;}
 
-/* FAQ — black bg */
-.faq{background:var(--black);border-top:2.5px solid var(--red);}
-.flist{border:2px solid var(--red);max-width:700px;}
-.fitem{padding:1.3rem 1.6rem;border-bottom:1.5px solid rgba(255,91,34,.2);}
-.fitem:last-child{border-bottom:none;}
-.fq{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--gold);margin-bottom:.45rem;}
-.fa{font-size:.78rem;color:rgba(245,240,232,.6);line-height:1.7;}
+/* ── FAQ ─────────────────────────────────────────────────────── */
+.faq-wrap{
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:4rem;align-items:start;
+}
+.faq-left h2{margin-bottom:1rem;}
+.faq-left p{font-size:.85rem;color:var(--gray);line-height:1.7;max-width:260px;}
+.faq-left .faq-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--black);color:var(--cream);
+  font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+  padding:.7rem 1.2rem;border-radius:999px;
+  text-decoration:none;cursor:none;margin-top:1.8rem;
+  transition:background .2s;
+}
+.faq-left .faq-cta:hover{background:var(--purple);}
+.faq-list{display:flex;flex-direction:column;}
+.faq-item{
+  padding:1.4rem 0;
+  border-bottom:1px solid rgba(28,28,28,.08);
+}
+.faq-item:first-child{border-top:1px solid rgba(28,28,28,.08);}
+.faq-q{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.03em;color:var(--black);margin-bottom:.5rem;}
+.faq-a{font-size:.82rem;color:var(--gray);line-height:1.7;}
 
-/* FOOTER CTA — blue bg */
-.fcta{background:var(--blue);border-top:3px solid var(--black);text-align:center;padding:5rem 1.5rem;position:relative;overflow:hidden;}
-.fcta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,8rem);color:var(--cream);line-height:.9;letter-spacing:.02em;margin-bottom:.8rem;}
-.fcta h2 span{color:var(--gold);}
-.fcta p{font-size:.82rem;color:rgba(245,240,232,.55);margin-bottom:2rem;}
-.fcs{position:absolute;font-family:'Bebas Neue',sans-serif;border:2px solid rgba(255,255,255,.25);padding:.4rem 1rem;}
-footer{background:var(--black);color:rgba(245,240,232,.3);text-align:center;padding:1.2rem;font-size:.72rem;border-top:2px solid var(--red);}
-footer a{color:var(--red);text-decoration:none;}
+/* ── FOOTER CTA ──────────────────────────────────────────────── */
+.footer-cta{
+  background:var(--purple);
+  border-radius:24px;
+  padding:5rem 4rem;
+  margin:0 2.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;
+  overflow:hidden;position:relative;
+}
+.footer-cta h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,5vw,5rem);
+  line-height:.9;letter-spacing:.02em;
+  color:var(--white);max-width:500px;
+}
+.footer-cta h2 em{font-style:normal;color:var(--lime);}
+.footer-cta p{color:rgba(255,255,255,.65);font-size:.85rem;margin-top:.8rem;line-height:1.6;}
+.footer-cta-btn{
+  flex-shrink:0;
+  display:inline-flex;align-items:center;gap:.8rem;
+  background:var(--white);color:var(--black);
+  font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+  padding:.9rem 1.2rem .9rem 1.8rem;border-radius:999px;
+  text-decoration:none;cursor:none;
+  transition:opacity .2s;white-space:nowrap;
+}
+.footer-cta-btn:hover{opacity:.9;}
+.footer-cta-arrow{background:var(--black);color:var(--white);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;}
 
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.spin{animation:spin 14s linear infinite;}
-@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.hero-title{animation:fu .5s ease both;}
-.hero-sub{animation:fu .5s .15s ease both;}
-.hero-ctas{animation:fu .5s .25s ease both;}
+footer{
+  text-align:center;padding:1.5rem 2rem 2rem;
+  font-size:.75rem;color:var(--gray);
+}
+footer a{color:var(--black);text-decoration:none;font-weight:500;}
 
-@media(max-width:900px){
-  .wgrid,.bgrid{grid-template-columns:1fr 1fr;}
-  .sgrid{grid-template-columns:1fr 1fr;}
-  .mod{grid-template-columns:50px 1fr;}
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hc1,.hc2,.hc3,.hc4,.hc5{animation:fadeUp .6s ease both;}
+.hc1{animation-delay:.05s;}.hc2{animation-delay:.1s;}.hc3{animation-delay:.15s;}.hc4{animation-delay:.2s;}.hc5{animation-delay:.25s;}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr 1fr;}
+  .hc1{grid-column:1/3;}
+  .hc2{grid-column:1/2;}
+  .hc3{grid-column:2/3;}
+  .hc4{grid-column:1/2;}
+  .hc5{grid-column:2/3;}
+  .stack-grid{grid-template-columns:1fr 1fr;}
+  .faq-wrap{grid-template-columns:1fr;gap:2rem;}
+  .faq-left p{max-width:100%;}
+}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:90px 1.2rem 1.2rem;}
+  .hc1,.hc2,.hc3,.hc4,.hc5{grid-column:1/2!important;grid-row:auto!important;}
+  .who-grid{grid-template-columns:1fr 1fr;}
+  .build-grid{grid-template-columns:1fr;}
+  .price-wrap{grid-template-columns:1fr;}
+  .price-right{padding:2rem 2.5rem 3rem;}
+  .footer-cta{flex-direction:column;padding:3rem 2rem;margin:0 1.2rem 2rem;}
+  .sec{padding:4rem 1.2rem;}
+  .sec-full{padding:4rem 1.2rem;}
+  nav{padding:.8rem 1.2rem;}
+  .stack-grid{grid-template-columns:1fr 1fr;}
+  .mod{grid-template-columns:44px 1fr;}
   .mtime{display:none;}
-  .s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8,.s9,.s10,.s11,.s12,.s13,.s14{display:none;}
 }
-@media(max-width:600px){
-  .wgrid,.bgrid,.sgrid{grid-template-columns:1fr;}
-  .wcard{border-right:none!important;border-bottom:2.5px solid var(--black);}
-  .hero-title{font-size:clamp(4.5rem,22vw,7rem);}
-  nav{padding:.7rem 1rem;}
-  .nlogo{font-size:1.4rem;}
-  .ncta{font-size:.62rem;padding:.45rem .9rem;}
-  .hero-sub p{font-size:.75rem;}
-  .btn-h{font-size:.72rem;padding:.75rem 1.3rem;}
-  .sec{padding:3rem 1rem;}
-  .stitle{font-size:clamp(2.4rem,10vw,3.5rem);}
+@media(max-width:480px){
+  .who-grid{grid-template-columns:1fr;}
+  .stack-grid{grid-template-columns:1fr;}
 }
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div id="cur"></div>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nlogo">VIBE<b>&</b>BUILD</a>
-  <a href="#pricing" class="ncta">Quiero mi lugar →</a>
+  <a href="#" class="nlogo">VIBE<span>&</span>BLOOM</a>
+  <a href="https://lu.ma/ign5s37r" target="_blank" class="ncta">Reservar lugar</a>
 </nav>
 
-<!-- HERO — cream bg -->
-<section class="hero">
-  <div class="hero-title">VIBE<br><span class="r">&</span><br><span class="b">BUILD</span></div>
+<!-- HERO -->
+<section style="min-height:100vh;background:var(--cream);padding-top:72px;position:relative;overflow:hidden;border-bottom:1px solid rgba(28,28,28,.1);">
 
-  <!-- sticker chaos -->
-  <div class="sl s1"><div class="sk circ" style="background:var(--red);color:var(--white);">WORKSHOP<br>EN VIVO<br>MAYO<br>2025</div></div>
-  <div class="sl s2"><div class="sk pill dash" style="background:var(--cream);color:var(--black);">SIN CÓDIGO ✦</div></div>
-  <div class="sl s3"><div class="sk pill" style="background:var(--blue);color:var(--white);">PARA CREATIVAS</div></div>
-  <div class="sl s4"><div class="sk pill dash" style="background:var(--gold);color:var(--black);">10–15 PERSONAS</div></div>
-  <div class="sl s5"><div class="sk big" style="background:var(--black);color:var(--gold);">BUILD<br>IT<br>YOURSELF</div></div>
-  <div class="sl s6"><div class="sk rect" style="background:var(--arctic);color:var(--black);">NO PERMISSION<br>NEEDED</div></div>
-  <div class="sl s7"><div class="sk pill" style="background:var(--red);color:var(--white);">CLAUDE</div></div>
-  <div class="sl s8"><div class="sk pill dash" style="background:var(--gold);color:var(--black);">GITHUB</div></div>
-  <div class="sl s9"><div class="sk pill" style="background:var(--blue);color:var(--white);">VERCEL</div></div>
-  <div class="sl s10"><div class="sk pill dash" style="background:var(--purple);color:var(--black);">SUPABASE</div></div>
-  <div class="sl s11">
-    <svg width="80" height="80" viewBox="0 0 10 10" style="image-rendering:pixelated;border:2.5px solid var(--black);background:var(--gold);">
-      <rect x="2" y="3" width="2" height="2" fill="#1A1008"/>
-      <rect x="6" y="3" width="2" height="2" fill="#1A1008"/>
-      <rect x="2" y="7" width="6" height="1" fill="#1A1008"/>
-      <rect x="1" y="8" width="8" height="1" fill="#1A1008"/>
+  <!-- Big title -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,17vw,14rem);line-height:.88;color:var(--black);padding:1rem 2.5rem 0;position:relative;z-index:1;letter-spacing:.02em;">
+    VIBE<br><span style="color:var(--purple);">&</span><br><span style="color:var(--purple);">BLOOM</span>
+  </div>
+
+  <!-- STICKERS -->
+
+  <!-- Circle -->
+  <div style="position:absolute;top:90px;right:4%;transform:rotate(3deg);z-index:10;">
+    <div style="border-radius:50%;width:110px;height:110px;background:var(--purple);border:2.5px solid var(--black);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;line-height:1.4;text-transform:uppercase;letter-spacing:.04em;color:var(--white);padding:1rem;">WORKSHOP<br>EN VIVO<br>MAYO 9<br>2026</div>
+  </div>
+
+  <!-- Pills -->
+  <div style="position:absolute;top:140px;right:23%;transform:rotate(-5deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.06em;border:2.5px dashed var(--black);background:var(--white);color:var(--black);">SIN CÓDIGO ✦</div>
+  </div>
+
+  <div style="position:absolute;top:225px;right:8%;transform:rotate(7deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.06em;border:2.5px solid var(--black);background:var(--purple);color:var(--white);">PARA CREATIVAS</div>
+  </div>
+
+  <div style="position:absolute;top:82px;right:39%;transform:rotate(-2deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.06em;border:2.5px dashed var(--black);background:var(--lime);color:var(--black);">10–15 PERSONAS</div>
+  </div>
+
+  <!-- Big rect stickers -->
+  <div style="position:absolute;top:325px;right:3%;transform:rotate(4deg);z-index:10;">
+    <div style="padding:.6rem 1.2rem;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.03em;line-height:1.1;border:2.5px solid var(--black);background:var(--black);color:var(--lime);">BUILD<br>IT<br>YOURSELF</div>
+  </div>
+
+  <div style="position:absolute;top:295px;right:26%;transform:rotate(-6deg);z-index:10;">
+    <div style="padding:.5rem 1rem;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.05em;line-height:1.1;border:2.5px solid var(--black);background:var(--pink);color:var(--black);">NO PERMISSION<br>NEEDED</div>
+  </div>
+
+  <!-- Stack pills -->
+  <div style="position:absolute;top:440px;right:12%;transform:rotate(2deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px solid var(--black);background:var(--purple);color:var(--white);">CLAUDE</div>
+  </div>
+
+  <div style="position:absolute;top:415px;right:36%;transform:rotate(-3deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px dashed var(--black);background:var(--lime);color:var(--black);">GITHUB</div>
+  </div>
+
+  <div style="position:absolute;top:530px;right:5%;transform:rotate(5deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px solid var(--black);background:var(--pink);color:var(--black);">VERCEL</div>
+  </div>
+
+  <div style="position:absolute;top:510px;right:28%;transform:rotate(-4deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px dashed var(--black);background:var(--white);color:var(--black);">SUPABASE</div>
+  </div>
+
+  <!-- Pixel face -->
+  <div style="position:absolute;top:610px;right:15%;transform:rotate(6deg);z-index:10;">
+    <svg width="80" height="80" viewBox="0 0 10 10" style="image-rendering:pixelated;border:2.5px solid var(--black);background:var(--lime);">
+      <rect x="2" y="3" width="2" height="2" fill="#1C1C1C"/>
+      <rect x="6" y="3" width="2" height="2" fill="#1C1C1C"/>
+      <rect x="2" y="7" width="6" height="1" fill="#1C1C1C"/>
+      <rect x="1" y="8" width="8" height="1" fill="#1C1C1C"/>
     </svg>
   </div>
-  <div class="sl s12"><div class="sk xl dash" style="background:var(--arctic);color:var(--black);">3.5H</div></div>
-  <div class="sl s13">
-    <div class="sk rect" style="background:var(--red);color:var(--white);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;padding:.7rem 1rem;text-transform:uppercase;">
-      DESDE<br><span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;">€35</span>
+
+  <!-- 3.5H -->
+  <div style="position:absolute;top:575px;right:42%;transform:rotate(-7deg);z-index:10;">
+    <div style="padding:.7rem 1.3rem;font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.02em;line-height:1;border:2.5px dashed var(--black);background:var(--pink);color:var(--black);">3.5H</div>
+  </div>
+
+  <!-- Price sticker -->
+  <div style="position:absolute;top:695px;right:4%;transform:rotate(3deg);z-index:10;">
+    <div style="padding:.7rem 1rem;border:2.5px solid var(--black);background:var(--purple);color:var(--white);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;text-transform:uppercase;text-align:center;">
+      DESDE<br><span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;display:block;">€35</span>
     </div>
   </div>
-  <div class="sl s14">
-    <svg class="spin" width="88" height="88" viewBox="0 0 88 88">
-      <circle cx="44" cy="44" r="39" fill="var(--arctic)" stroke="var(--black)" stroke-width="2.5"/>
+
+  <!-- Spinning circle -->
+  <div style="position:absolute;top:675px;right:30%;transform:rotate(-2deg);z-index:10;">
+    <svg style="animation:spin 14s linear infinite;" width="88" height="88" viewBox="0 0 88 88">
+      <circle cx="44" cy="44" r="39" fill="var(--pink)" stroke="var(--black)" stroke-width="2.5"/>
       <text font-family="'Bebas Neue',sans-serif" font-size="8.5" fill="var(--black)">
-        <textPath href="#cp3">VIBE &amp; BUILD ✦ MAYO 2025 ✦ VIBE &amp; BUILD ✦ MAYO 2025 ✦ </textPath>
+        <textPath href="#cp4">VIBE &amp; BLOOM ✦ MAYO 2026 ✦ VIBE &amp; BLOOM ✦ MAYO 2026 ✦ </textPath>
       </text>
-      <defs><path id="cp3" d="M44,5 A39,39 0 1,1 43.99,5"/></defs>
+      <defs><path id="cp4" d="M44,5 A39,39 0 1,1 43.99,5"/></defs>
       <text x="44" y="50" font-family="'Bebas Neue',sans-serif" font-size="13" fill="var(--black)" text-anchor="middle">★</text>
     </svg>
   </div>
-  <div class="sl s15"><div class="sk pill dash" style="background:var(--purple);color:var(--black);">FREELANCERS</div></div>
-  <div class="sl s16"><div class="sk pill" style="background:var(--blue);color:var(--white);">AGENCIAS</div></div>
 
-  <div class="hero-sub"><p>Sin código. Sin pedir permiso. Sin esperar a que alguien más lo haga. Un workshop para construir tus propias tools digitales desde cero.</p></div>
-  <div class="hero-ctas">
-    <a href="#pricing" class="btn-h">Reservar mi lugar →</a>
-    <div class="ptag">SOLO 10–15 LUGARES ✦ MAYO 2025</div>
+  <!-- Left stickers -->
+  <div style="position:absolute;top:190px;left:3%;transform:rotate(-4deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px dashed var(--black);background:var(--purple);color:var(--white);">FREELANCERS</div>
   </div>
-  <div class="hero-bar">
-    <span class="hbi">Workshop virtual en vivo</span><span class="hbd">✦</span>
-    <span class="hbi">3.5 horas</span><span class="hbd">✦</span>
-    <span class="hbi">Claude + GitHub + Vercel + Supabase</span><span class="hbd">✦</span>
-    <span class="hbi">Para creativas</span><span class="hbd">✦</span>
-    <span class="hbi">Sin código</span>
+
+  <div style="position:absolute;top:365px;left:2%;transform:rotate(5deg);z-index:10;">
+    <div style="border-radius:999px;padding:.42rem 1.1rem;font-family:'Bebas Neue',sans-serif;font-size:.9rem;border:2.5px solid var(--black);background:var(--lime);color:var(--black);">AGENCIAS</div>
   </div>
+
+  <!-- Sub text + CTA -->
+  <div style="position:relative;z-index:15;padding:.5rem 2.5rem 0;max-width:480px;">
+    <p style="font-size:.82rem;color:var(--black);line-height:1.75;font-weight:400;opacity:.65;">Tu idea, tu app, tu vibe. Aprende a construir sin código — aunque nunca hayas programado en tu vida.</p>
+  </div>
+
+  <div style="padding:.9rem 2.5rem 0;position:relative;z-index:15;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+    <a href="https://lu.ma/ign5s37r" target="_blank" style="background:var(--purple);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:.85rem 1.8rem;border-radius:999px;text-decoration:none;cursor:none;transition:opacity .2s,transform .15s;display:inline-block;">Reservar mi lugar →</a>
+    <div style="background:var(--lime);color:var(--black);font-size:.68rem;font-weight:700;padding:.45rem 1rem;border-radius:999px;font-family:'DM Sans',monospace;text-transform:uppercase;letter-spacing:.08em;border:1.5px solid var(--black);">SOLO 10–15 LUGARES ✦ MAYO 9 2026</div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div style="background:var(--black);padding:.7rem 2.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;position:relative;z-index:20;margin-top:1.2rem;">
+    <span style="font-size:.68rem;color:var(--lime);font-weight:500;text-transform:uppercase;letter-spacing:.1em;">Workshop virtual en vivo</span>
+    <span style="color:var(--purple);">✦</span>
+    <span style="font-size:.68rem;color:var(--lime);font-weight:500;text-transform:uppercase;letter-spacing:.1em;">3.5 horas</span>
+    <span style="color:var(--purple);">✦</span>
+    <span style="font-size:.68rem;color:var(--lime);font-weight:500;text-transform:uppercase;letter-spacing:.1em;">Claude + GitHub + Vercel + Supabase</span>
+    <span style="color:var(--purple);">✦</span>
+    <span style="font-size:.68rem;color:var(--lime);font-weight:500;text-transform:uppercase;letter-spacing:.1em;">Sin código</span>
+  </div>
+
 </section>
 
-<!-- MARQUEE — red -->
+<!-- MARQUEE -->
 <div class="mq"><div class="mqi">
-  <span>VIBECODING</span><span class="dot">✦</span><span>SIN CÓDIGO</span><span class="dot">✦</span><span>PARA CREATIVAS</span><span class="dot">✦</span><span>BUILD YOUR OWN TOOLS</span><span class="dot">✦</span><span>NO PERMISSION NEEDED</span><span class="dot">✦</span><span>CLAUDE + GITHUB + VERCEL + SUPABASE</span><span class="dot">✦</span>
-  <span>VIBECODING</span><span class="dot">✦</span><span>SIN CÓDIGO</span><span class="dot">✦</span><span>PARA CREATIVAS</span><span class="dot">✦</span><span>BUILD YOUR OWN TOOLS</span><span class="dot">✦</span><span>NO PERMISSION NEEDED</span><span class="dot">✦</span><span>CLAUDE + GITHUB + VERCEL + SUPABASE</span><span class="dot">✦</span>
+  <span>VIBE & BLOOM</span><span class="dot">✦</span><span>SIN CÓDIGO</span><span class="dot">✦</span><span>PARA CREATIVAS</span><span class="dot">✦</span><span>BUILD YOUR OWN TOOLS</span><span class="dot">✦</span><span>MAYO 9 2026</span><span class="dot">✦</span><span>CLAUDE + GITHUB + VERCEL + SUPABASE</span><span class="dot">✦</span>
+  <span>VIBE & BLOOM</span><span class="dot">✦</span><span>SIN CÓDIGO</span><span class="dot">✦</span><span>PARA CREATIVAS</span><span class="dot">✦</span><span>BUILD YOUR OWN TOOLS</span><span class="dot">✦</span><span>MAYO 9 2026</span><span class="dot">✦</span><span>CLAUDE + GITHUB + VERCEL + SUPABASE</span><span class="dot">✦</span>
 </div></div>
 
-<!-- WHO — arctic -->
-<section class="sec who"><div class="si">
-  <div class="slbl">¿Para quién?</div>
-  <h2 class="stitle" style="color:var(--black)">ESTE WORKSHOP<br>ES PARA TI.</h2>
-  <div class="wgrid">
-    <div class="wcard">
-      <span class="wemoji">💡</span>
-      <div class="wname">Tienes una idea y no sabes por dónde empezar</div>
-      <p class="wdesc">Sabes lo que necesitas pero no tienes ni idea de cómo construirlo. Este workshop es exactamente eso.</p>
-    </div>
-    <div class="wcard">
-      <span class="wemoji">🚀</span>
-      <div class="wname">Creativxs que necesitan tools para escalar</div>
-      <p class="wdesc">Tienes el negocio. Solo te faltan las herramientas que lo hagan crecer sin que tú tengas que estar en todo.</p>
-    </div>
-    <div class="wcard">
-      <span class="wemoji">⚡</span>
-      <div class="wname">Freelancers que necesitan gestionar y automatizar</div>
-      <p class="wdesc">Propuestas, pricing, seguimiento de clientes. Todo eso puede funcionar solo. Literalmente.</p>
-    </div>
-    <div class="wcard">
-      <span class="wemoji">🏢</span>
-      <div class="wname">Agencias boutique que quieren entender mejor a su cliente</div>
-      <p class="wdesc">Briefings automáticos, diagnósticos de marca, dashboards, reportes. Sistemas hechos a tu medida — no adaptados de algo genérico que nunca termina de encajar.</p>
+<!-- WHO -->
+<div class="sec-full">
+  <div class="inner">
+    <div class="sec-label">¿Para quién?</div>
+    <h2 class="sec-title">ESTE WORKSHOP<br>ES PARA <em>TI.</em></h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon" style="background:rgba(130,109,238,.12);">💡</div>
+        <div class="who-name">Tienes una idea y no sabes por dónde empezar</div>
+        <p class="who-desc">Sabes lo que necesitas pero no sabes cómo construirlo. Este workshop es exactamente eso.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon" style="background:rgba(235,66,19,.1);">🚀</div>
+        <div class="who-name">Creativxs que necesitan tools para escalar</div>
+        <p class="who-desc">Tienes el negocio. Solo te faltan las herramientas que lo hagan crecer sin que tú tengas que estar en todo.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon" style="background:rgba(216,243,130,.4);">⚡</div>
+        <div class="who-name">Freelancers que necesitan gestionar y automatizar</div>
+        <p class="who-desc">Propuestas, pricing, seguimiento. Todo puede funcionar solo. Literalmente.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon" style="background:rgba(255,153,220,.25);">🏢</div>
+        <div class="who-name">Agencias boutique que quieren entender mejor a su cliente</div>
+        <p class="who-desc">Briefings automáticos, diagnósticos de marca, dashboards. Hechos a tu medida — no adaptados de algo genérico.</p>
+      </div>
     </div>
   </div>
-</div></section>
+</div>
 
-<!-- BUILD — blue -->
-<section class="sec build"><div class="si">
-  <div class="slbl" style="background:var(--gold);color:var(--black);">Lo que construirás</div>
-  <h2 class="stitle" style="color:var(--white)">TOOLS QUE <span style="color:var(--gold)">EXISTEN</span><br>PORQUE TÚ LAS HACES.</h2>
-  <div class="bgrid">
-    <div class="bitem"><div class="bnum">01</div><div class="bname">Generador de propuestas</div><div class="bdesc">De 2 horas a 30 segundos.</div><div class="bsk" style="bottom:1rem;right:1rem;background:var(--gold);color:var(--black);transform:rotate(3deg)">2H→30SEG</div></div>
-    <div class="bitem"><div class="bnum">02</div><div class="bname">Calculadora de pricing</div><div class="bdesc">Nunca más undercharge.</div></div>
-    <div class="bitem"><div class="bnum">03</div><div class="bname">Dashboard de proyectos</div><div class="bdesc">Estado real de tus clientes.</div><div class="bsk" style="top:1rem;right:1rem;background:var(--red);color:var(--white);transform:rotate(-4deg);border-style:dashed">REAL-TIME</div></div>
-    <div class="bitem"><div class="bnum">04</div><div class="bname">Generador de reportes</div><div class="bdesc">El que tardabas 3h en Canva.</div></div>
-    <div class="bitem"><div class="bnum">05</div><div class="bname">Planificador de contenido</div><div class="bdesc">Tu voz, no la de la IA.</div><div class="bsk" style="bottom:1rem;left:1rem;background:var(--arctic);color:var(--black);transform:rotate(-2deg)">TU VOZ ✦</div></div>
-    <div class="bitem"><div class="bnum">06</div><div class="bname">La que tú necesitas</div><div class="bdesc">Exactamente lo que falta.</div><div class="bsk" style="top:1rem;right:1rem;background:var(--gold);color:var(--black);transform:rotate(5deg);border-style:dashed">TÚ DECIDES</div></div>
+<!-- BUILD -->
+<div class="sec-full" style="background:var(--light);">
+  <div class="inner">
+    <div class="sec-label">Lo que construirás</div>
+    <h2 class="sec-title">TOOLS QUE EXISTEN<br>PORQUE <em>TÚ</em> LAS HACES.</h2>
+    <div class="build-grid">
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--purple);"></div>
+        <div class="build-num">01</div>
+        <div class="build-tag" style="background:rgba(235,66,19,.1);color:var(--purple);">Agencias · Freelance</div>
+        <div class="build-name">Generador de propuestas</div>
+        <p class="build-desc">Ingresas cliente + tipo de proyecto. Genera la propuesta lista con tu branding. De 2 horas a 30 segundos.</p>
+      </div>
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--purple);"></div>
+        <div class="build-num">02</div>
+        <div class="build-tag" style="background:rgba(130,109,238,.12);color:var(--purple);">Freelance</div>
+        <div class="build-name">Calculadora de pricing</div>
+        <p class="build-desc">Horas + tipo + revisiones. Precio con tu margen. Nunca más undercharge por miedo a que "se vea mucho".</p>
+      </div>
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--pink);"></div>
+        <div class="build-num">03</div>
+        <div class="build-tag" style="background:rgba(255,153,220,.2);color:#c0068a;">Agencias</div>
+        <div class="build-name">Dashboard de proyectos</div>
+        <p class="build-desc">Estado de cada cliente en tiempo real. Sin el Google Sheet que nadie actualiza.</p>
+      </div>
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--lime);"></div>
+        <div class="build-num">04</div>
+        <div class="build-tag" style="background:rgba(216,243,130,.4);color:#5a7a00;">Agencias</div>
+        <div class="build-name">Generador de reportes</div>
+        <p class="build-desc">Ingresas los números del mes. Genera el reporte listo para enviar. El que tardabas 3h en Canva.</p>
+      </div>
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--purple);"></div>
+        <div class="build-num">05</div>
+        <div class="build-tag" style="background:rgba(235,66,19,.1);color:var(--purple);">Content · Social</div>
+        <div class="build-name">Planificador de contenido</div>
+        <p class="build-desc">Describes de qué quieres hablar. Genera ideas de posts en tu tono específico. Tu voz, no la de la IA.</p>
+      </div>
+      <div class="build-card">
+        <div class="build-accent" style="background:var(--purple);"></div>
+        <div class="build-num">06</div>
+        <div class="build-tag" style="background:rgba(130,109,238,.12);color:var(--purple);">Agencias</div>
+        <div class="build-name">Diagnóstico de marca automático</div>
+        <p class="build-desc">El cliente llena el form. La tool analiza y genera el diagnóstico inicial. Ahorra la primera reunión.</p>
+      </div>
+    </div>
   </div>
-</div></section>
+</div>
 
-<!-- STACK — cream -->
-<section class="sec stack"><div class="si">
-  <div class="slbl" style="background:var(--red);color:var(--white);">El stack</div>
-  <h2 class="stitle" style="color:var(--black)">4 TOOLS.<br>TODO LO QUE <span style="color:var(--red)">NECESITAS.</span></h2>
-  <div class="sgrid">
-    <div class="scard" style="background:var(--red);"><div class="sname" style="color:var(--white)">CLAUDE</div><div class="sbadge" style="background:var(--black);color:var(--gold);">CONSTRUYES AQUÍ</div><p class="sdesc" style="color:rgba(255,255,255,.85)">Le hablas en español. Construye el código.</p></div>
-    <div class="scard" style="background:var(--black);"><div class="sname" style="color:var(--white)">GITHUB</div><div class="sbadge" style="background:var(--gold);color:var(--black);">GUARDAS AQUÍ</div><p class="sdesc" style="color:rgba(245,240,232,.7)">Google Drive para tu código. Gratis.</p></div>
-    <div class="scard" style="background:var(--arctic);"><div class="sname" style="color:var(--black)">VERCEL</div><div class="sbadge" style="background:var(--black);color:var(--arctic);">PUBLICAS AQUÍ</div><p class="sdesc" style="color:var(--black)">Link real en 2 min. Sin servidores.</p></div>
-    <div class="scard" style="background:var(--purple);"><div class="sname" style="color:var(--black)">SUPABASE</div><div class="sbadge" style="background:var(--blue);color:var(--white);">GUARDAS DATOS</div><p class="sdesc" style="color:var(--black)">Para que tu tool recuerde todo.</p></div>
+<!-- STACK -->
+<div class="sec-full">
+  <div class="inner">
+    <div class="sec-label">El stack</div>
+    <h2 class="sec-title">4 TOOLS.<br>TODO LO QUE <em>NECESITAS.</em></h2>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-icon" style="background:rgba(235,66,19,.1);">🤖</div>
+        <div class="stack-name">CLAUDE</div>
+        <div class="stack-badge" style="background:rgba(235,66,19,.1);color:var(--purple);">CONSTRUYES AQUÍ</div>
+        <p class="stack-desc">Le hablas en español. Construye el código. Tu punto de entrada para todo.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon" style="background:rgba(28,28,28,.06);">🐙</div>
+        <div class="stack-name">GITHUB</div>
+        <div class="stack-badge" style="background:rgba(28,28,28,.06);color:var(--black);">GUARDAS AQUÍ</div>
+        <p class="stack-desc">Como Google Drive para tu código. Guarda versiones, nunca pierdes nada. Gratis.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon" style="background:rgba(130,109,238,.12);">▲</div>
+        <div class="stack-name">VERCEL</div>
+        <div class="stack-badge" style="background:rgba(130,109,238,.12);color:var(--purple);">PUBLICAS AQUÍ</div>
+        <p class="stack-desc">Link real en 2 min. Sin servidores. Sin configurar nada. Gratis.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon" style="background:rgba(216,243,130,.4);">🗄</div>
+        <div class="stack-name">SUPABASE</div>
+        <div class="stack-badge" style="background:rgba(216,243,130,.4);color:#5a7a00;">GUARDAS DATOS</div>
+        <p class="stack-desc">Para que tu tool recuerde todo. Sin esto, olvida al cerrar la pestaña.</p>
+      </div>
+    </div>
   </div>
-</div></section>
+</div>
 
-<!-- CURRICULUM — purple -->
-<section class="sec curr"><div class="si">
-  <div class="slbl" style="background:var(--blue);color:var(--white);">Contenido</div>
-  <h2 class="stitle" style="color:var(--black)">3.5 HORAS.<br><span style="color:var(--red)">TODO</span> LO QUE NECESITAS.</h2>
-  <div class="mods">
-    <div class="mod"><div class="mnum">01</div><div><div class="mtitle">¿Qué es vibecoding y qué puedes crear?</div><p class="mdesc">Ves ejemplos reales y defines lo que vas a construir hoy.</p><div class="mpills"><span class="mpill">Conceptos</span><span class="mpill">Ejemplos reales</span><span class="mpill">Define tu tool</span></div></div><div class="mtime">25 MIN</div></div>
-    <div class="mod"><div class="mnum">02</div><div><div class="mtitle">El ecosistema: Claude, GitHub, Vercel, Supabase</div><p class="mdesc">Para qué sirve cada herramienta y cómo se conectan.</p><div class="mpills"><span class="mpill">Claude</span><span class="mpill">GitHub</span><span class="mpill">Vercel</span><span class="mpill">Supabase</span></div></div><div class="mtime">20 MIN</div></div>
-    <div class="mod"><div class="mnum">03</div><div><div class="mtitle">Manos a la obra — construimos juntas</div><p class="mdesc">Sigues mi pantalla y construyes tu tool paso a paso.</p><div class="mpills"><span class="mpill">Prompting</span><span class="mpill">Build en vivo</span><span class="mpill">Iteración</span></div></div><div class="mtime">60 MIN</div></div>
-    <div class="mod mbrk"><div class="mnum">🍕</div><div><div class="mtitle">Break — comer, conversar, respirar</div><p class="mdesc">20 minutos para recargar.</p></div><div class="mtime">20 MIN</div></div>
-    <div class="mod"><div class="mnum">04</div><div><div class="mtitle">GitHub + Vercel — tu tool en internet</div><p class="mdesc">Al final tienes un link real que puedes mandar ahora mismo.</p><div class="mpills"><span class="mpill">GitHub</span><span class="mpill">Deploy</span><span class="mpill">Link real</span></div></div><div class="mtime">40 MIN</div></div>
-    <div class="mod"><div class="mnum">05</div><div><div class="mtitle">Supabase — que tu tool recuerde todo</div><p class="mdesc">De calculadora desechable a sistema real.</p><div class="mpills"><span class="mpill">Base de datos</span><span class="mpill">Sin tecnicismos</span><span class="mpill">En vivo</span></div></div><div class="mtime">30 MIN</div></div>
-    <div class="mod"><div class="mnum">06</div><div><div class="mtitle">Cómo no gastar de más</div><p class="mdesc">Tokens, modelos, free tiers. Sin sorpresas en la tarjeta.</p><div class="mpills"><span class="mpill">Tokens</span><span class="mpill">Free tiers</span><span class="mpill">Tips</span></div></div><div class="mtime">15 MIN</div></div>
+<!-- CURRICULUM -->
+<div class="sec-full" style="background:var(--light);">
+  <div class="inner">
+    <div class="sec-label">Contenido</div>
+    <h2 class="sec-title">3.5 HORAS.<br><em>TODO</em> LO QUE NECESITAS.</h2>
+    <div class="curr-wrap">
+      <div class="mod"><div class="mnum">01</div><div><div class="mtitle">¿Qué es vibecoding y qué puedes crear?</div><p class="mdesc">Ves ejemplos reales para creativas y agencias. Defines lo que vas a construir hoy.</p><div class="mpills"><span class="mpill">Conceptos</span><span class="mpill">Ejemplos reales</span><span class="mpill">Define tu tool</span></div></div><div class="mtime">25 min</div></div>
+      <div class="mod"><div class="mnum">02</div><div><div class="mtitle">El ecosistema: Claude, GitHub, Vercel, Supabase</div><p class="mdesc">Para qué sirve cada herramienta y cómo se conectan entre sí.</p><div class="mpills"><span class="mpill">Claude</span><span class="mpill">GitHub</span><span class="mpill">Vercel</span><span class="mpill">Supabase</span></div></div><div class="mtime">20 min</div></div>
+      <div class="mod"><div class="mnum">03</div><div><div class="mtitle">Manos a la obra — construimos juntas</div><p class="mdesc">Sigues mi pantalla. Construyes tu tool paso a paso y aprendes a iterar.</p><div class="mpills"><span class="mpill">Prompting</span><span class="mpill">Build en vivo</span><span class="mpill">Iteración</span></div></div><div class="mtime">60 min</div></div>
+      <div class="mod mbrk"><div class="mnum">🍕</div><div><div class="mtitle">Break — comer, conversar, respirar</div><p class="mdesc">20 minutos para recargar. El cerebro necesita pausa.</p></div><div class="mtime" style="color:rgba(216,243,130,.4)">20 min</div></div>
+      <div class="mod"><div class="mnum">04</div><div><div class="mtitle">GitHub + Vercel — tu tool en internet</div><p class="mdesc">Al final tienes un link real que puedes mandar por WhatsApp ahora mismo.</p><div class="mpills"><span class="mpill">GitHub</span><span class="mpill">Deploy</span><span class="mpill">Link real</span></div></div><div class="mtime">40 min</div></div>
+      <div class="mod"><div class="mnum">05</div><div><div class="mtitle">Supabase — que tu tool recuerde todo</div><p class="mdesc">De calculadora desechable a sistema real.</p><div class="mpills"><span class="mpill">Base de datos</span><span class="mpill">Sin tecnicismos</span><span class="mpill">En vivo</span></div></div><div class="mtime">30 min</div></div>
+      <div class="mod"><div class="mnum">06</div><div><div class="mtitle">Cómo no gastar de más</div><p class="mdesc">Tokens, modelos, free tiers. Sin sorpresas en la tarjeta.</p><div class="mpills"><span class="mpill">Tokens</span><span class="mpill">Free tiers</span><span class="mpill">Tips</span></div></div><div class="mtime">15 min</div></div>
+    </div>
   </div>
-</div></section>
+</div>
 
-<!-- PRICING — gold -->
-<section id="pricing" style="background:var(--gold);border-top:2.5px solid var(--black);border-bottom:2.5px solid var(--black);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2rem;">
-  <div style="max-width:1100px;margin:0 auto;width:100%;">
-    <div style="background:var(--black);color:var(--white);border:2.5px solid var(--black);padding:0;display:grid;grid-template-columns:1fr 1fr;min-height:420px;box-shadow:8px 8px 0 var(--black);">
-
-      <!-- Left — big price -->
-      <div style="background:var(--red);padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:space-between;border-right:2.5px solid var(--black);">
+<!-- PRICING -->
+<div class="sec-full" id="pricing">
+  <div class="inner">
+    <div class="sec-label">Precio</div>
+    <h2 class="sec-title">UN LUGAR.<br>UN <em>PRECIO.</em></h2>
+    <div class="price-wrap">
+      <div class="price-left">
         <div>
-          <div style="display:inline-block;background:var(--black);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.15em;padding:.3rem 1rem;margin-bottom:1.5rem;">PRECIO</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,12vw,10rem);line-height:.9;color:var(--white);">€35</div>
-          <div style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;">Pago único · Sin sorpresas</div>
+          <div style="background:rgba(255,255,255,.15);color:var(--white);font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;padding:.35rem 1rem;border-radius:999px;display:inline-block;">Workshop completo</div>
+          <div class="price-amount" style="margin-top:1.2rem;">€35</div>
+          <div class="price-sub">Pago único · Sin sorpresas</div>
         </div>
-        <a href="#" style="background:var(--black);color:var(--gold);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1rem 1.5rem;border:2.5px solid var(--black);box-shadow:5px 5px 0 var(--gold);text-decoration:none;display:inline-block;margin-top:2rem;cursor:none;transition:transform .1s,box-shadow .1s;">Reservar mi lugar →</a>
+        <a href="https://lu.ma/ign5s37r" target="_blank" class="price-btn">
+          Reservar mi lugar
+          <span class="price-arrow">→</span>
+        </a>
       </div>
-
-      <!-- Right — what's included -->
-      <div style="padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:.05em;margin-bottom:1.8rem;">QUÉ INCLUYE</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:1.1rem;">
-          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
-            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
-            3.5 horas de workshop en vivo
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
-            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
-            Construyes tu propia tool ese mismo día
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
-            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
-            Tu tool publicada con link real
-          </li>
-          <li style="display:flex;align-items:flex-start;gap:.8rem;font-size:.85rem;color:rgba(245,240,232,.85);line-height:1.5;">
-            <span style="color:var(--gold);font-weight:700;flex-shrink:0;font-size:1rem;">→</span>
-            Atención personalizada por WhatsApp durante 1 mes
-          </li>
-        </ul>
+      <div class="price-right">
+        <div class="price-item"><div class="price-item-dot"></div><div class="price-item-text">3.5 horas de workshop en vivo</div></div>
+        <div class="price-item"><div class="price-item-dot"></div><div class="price-item-text">Construyes tu propia tool ese mismo día</div></div>
+        <div class="price-item"><div class="price-item-dot"></div><div class="price-item-text">Tu tool publicada con link real</div></div>
+        <div class="price-item"><div class="price-item-dot"></div><div class="price-item-text">Atención personalizada por WhatsApp durante 1 mes para resolver dudas</div></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FAQ — black -->
-<section class="sec faq"><div class="si">
-  <div class="slbl" style="background:var(--gold);color:var(--black);">FAQ</div>
-  <h2 class="stitle" style="color:var(--cream)">¿TIENES <span style="color:var(--red)">DUDAS?</span></h2>
-  <div class="flist">
-    <div class="fitem"><div class="fq">¿Necesito saber programar?</div><p class="fa">Para nada. La IA escribe el código. Tú decides qué construir.</p></div>
-    <div class="fitem"><div class="fq">¿Qué necesito?</div><p class="fa">Computadora con internet. Las cuentas son todas gratuitas.</p></div>
-    <div class="fitem"><div class="fq">¿Voy a terminar con algo funcional?</div><p class="fa">Sí. Una tool publicada con link real. Básica pero tuya.</p></div>
-    <div class="fitem"><div class="fq">¿Hay que pagar por las herramientas?</div><p class="fa">No para empezar. Todo tiene plan gratis que aguanta bien.</p></div>
-    <div class="fitem"><div class="fq">¿Por qué solo 10–15 personas?</div><p class="fa">Formato pequeño = atención real. Todas construyen, todas reciben ayuda.</p></div>
+<!-- FAQ -->
+<div class="sec-full" style="background:var(--light);">
+  <div class="inner">
+    <div class="faq-wrap">
+      <div class="faq-left">
+        <div class="sec-label">FAQ</div>
+        <h2 class="sec-title" style="font-size:clamp(2rem,4vw,3.5rem)">¿TIENES<br><em>DUDAS?</em></h2>
+        <p>Si no encuentras lo que buscas, escríbenos directamente.</p>
+        <a href="https://lu.ma/ign5s37r" target="_blank" class="faq-cta">Ya estoy lista →</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">¿Necesito saber programar?</div><p class="faq-a">Para nada. La IA escribe el código. Tú decides qué construir y cómo debe funcionar.</p></div>
+        <div class="faq-item"><div class="faq-q">¿Qué necesito para el taller?</div><p class="faq-a">Computadora con internet y ganas de construir. Las cuentas que usamos son todas gratuitas — te explicamos cómo crearlas en el mismo taller.</p></div>
+        <div class="faq-item"><div class="faq-q">¿Voy a terminar con algo funcional ese mismo día?</div><p class="faq-a">Sí. Una tool publicada con su propio link. Básica, pero real y tuya. A partir de ahí la sigues iterando.</p></div>
+        <div class="faq-item"><div class="faq-q">¿Hay que pagar por las herramientas?</div><p class="faq-a">No para empezar. Claude, GitHub, Vercel y Supabase tienen planes gratuitos que aguantan perfectamente para el taller y las primeras semanas.</p></div>
+        <div class="faq-item"><div class="faq-q">¿Por qué solo 10–15 personas?</div><p class="faq-a">Porque el formato pequeño permite atención real. No es una masterclass pasiva — todas construyen y todas reciben ayuda cuando la necesitan.</p></div>
+        <div class="faq-item"><div class="faq-q">¿Qué pasa después del taller?</div><p class="faq-a">Tienes atención personalizada por WhatsApp durante 1 mes para resolver cualquier duda mientras sigues construyendo.</p></div>
+      </div>
+    </div>
   </div>
-</div></section>
+</div>
 
-<!-- FOOTER — blue -->
-<section class="fcta">
-  <div class="fcs" style="top:2rem;left:5%;background:var(--red);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;transform:rotate(-3deg)">BUILD IT</div>
-  <div class="fcs" style="top:3rem;right:8%;background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:1rem;transform:rotate(4deg)">YOUR TOOLS</div>
-  <div class="fcs" style="bottom:3rem;left:8%;background:var(--black);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:.9rem;transform:rotate(2deg);border-style:dashed;border-color:var(--gold)">NO CODE</div>
-  <h2>LAS HERRAMIENTAS<br>SIEMPRE FUERON<br><span>NUESTRAS.</span></h2>
-  <p>Solo nos dijeron que era muy difícil.</p>
-  <a href="#pricing" class="btn-h" style="display:inline-block;padding:1rem 2.5rem;background:var(--cream);color:var(--black);box-shadow:5px 5px 0 var(--black);">Quiero mi lugar →</a>
-</section>
-<footer><p>© 2025 Vibe &amp; Build · Hecho con vibecoding ✦ · <a href="#">@vibeandbuild</a></p></footer>
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <div>
+    <h2>LAS HERRAMIENTAS<br>SIEMPRE FUERON <em>NUESTRAS.</em></h2>
+    <p>Solo nos dijeron que era muy difícil.</p>
+  </div>
+  <a href="https://lu.ma/ign5s37r" target="_blank" class="footer-cta-btn">
+    Quiero mi lugar
+    <span class="footer-cta-arrow">→</span>
+  </a>
+</div>
+
+<footer>
+  <p>© 2026 Vibe & Bloom · Hecho con vibecoding ✦ · <a href="#">@vibeandbloom</a></p>
+</footer>
 
 <script>
-const c=document.getElementById('cur');
-document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
-document.querySelectorAll('a,button,.wcard,.scard,.bitem').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{c.style.transform='translate(-50%,-50%) scale(2.5)';});
-  el.addEventListener('mouseleave',()=>{c.style.transform='translate(-50%,-50%) scale(1)';});
+const c = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  c.style.left = e.clientX + 'px';
+  c.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .who-card, .build-card, .stack-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { c.style.width='24px'; c.style.height='24px'; c.style.background='var(--purple)'; });
+  el.addEventListener('mouseleave', () => { c.style.width='12px'; c.style.height='12px'; c.style.background='var(--purple)'; });
 });
 </script>
 </body>
