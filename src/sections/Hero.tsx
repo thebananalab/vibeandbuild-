@@ -4,7 +4,7 @@ export default function Hero() {
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-5 sm:px-10 py-5 relative z-10">
-        <span className="font-bebas text-dark tracking-widest text-[23px]">VIBE & BLOOM</span>
+        <span className="font-bebas text-dark tracking-widest text-[28px]">VIBE & BLOOM</span>
         <a
           href="https://luma.com/ign5s37r"
           className="bg-dark text-cream font-dm font-medium text-[11px] tracking-[1.1px] uppercase px-5 py-3 rounded-full hover:bg-purple transition-colors"
