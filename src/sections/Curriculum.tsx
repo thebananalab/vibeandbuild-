@@ -59,11 +59,11 @@ const MODULES = [
 
 export default function Curriculum() {
   return (
-    <section className="bg-light-bg py-24 px-[77px]">
+    <section className="bg-light-bg py-16 px-5 sm:px-8 lg:px-[77px]">
       <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-8">
         Contenido
       </p>
-      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: '73px' }}>
+      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: 'clamp(42px, 8vw, 73px)' }}>
         3.5 HORAS.<br />
         <span className="text-purple">TODO</span>
         {' '}LO QUE NECESITAS.
@@ -73,7 +73,7 @@ export default function Curriculum() {
         {MODULES.map((mod, i) => (
           <div
             key={i}
-            className={`flex items-start gap-6 px-8 py-6 border-b border-[rgba(255,255,255,0.06)] last:border-b-0 ${
+            className={`flex items-start gap-3 sm:gap-6 px-4 sm:px-8 py-6 border-b border-[rgba(255,255,255,0.06)] last:border-b-0 ${
               mod.isBreak ? 'bg-[rgba(216,243,130,0.04)]' : ''
             }`}
           >

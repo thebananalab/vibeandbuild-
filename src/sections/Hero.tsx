@@ -3,7 +3,7 @@ export default function Hero() {
     <section className="bg-cream border-b border-[rgba(28,28,28,0.1)] relative overflow-hidden">
 
       {/* ── Nav ── */}
-      <nav className="flex items-center justify-between px-10 py-5 relative z-10">
+      <nav className="flex items-center justify-between px-5 sm:px-10 py-5 relative z-10">
         <span className="font-bebas text-dark tracking-widest text-xl">VIBE & BLOOM</span>
         <a
           href="https://luma.com/ign5s37r"
@@ -14,10 +14,10 @@ export default function Hero() {
       </nav>
 
       {/* ── Body: two columns ── */}
-      <div className="flex items-stretch min-h-[640px]">
+      <div className="flex items-stretch min-h-[480px] md:min-h-[640px]">
 
         {/* Left: text */}
-        <div className="relative w-[52%] flex flex-col justify-between pl-10 pr-8 pb-16 pt-16">
+        <div className="relative w-full md:w-[52%] flex flex-col justify-between pl-5 sm:pl-10 pr-5 sm:pr-8 pb-12 md:pb-16 pt-12 md:pt-16">
 
           {/* AGENCIAS badge — floats near top-left of text */}
           <div
@@ -62,7 +62,7 @@ export default function Hero() {
         </div>
 
         {/* Right: sticker field — percentage-positioned within container */}
-        <div className="flex-1 relative" style={{ minHeight: '560px' }}>
+        <div className="hidden md:block flex-1 relative" style={{ minHeight: '560px' }}>
           {/*
             All sticker positions as % of this container.
             Original sticker area: ~804px wide × ~648px tall.

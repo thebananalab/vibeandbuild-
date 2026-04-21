@@ -7,17 +7,17 @@ const FEATURES = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-cream py-24 px-[77px]">
+    <section id="pricing" className="bg-cream py-16 px-5 sm:px-8 lg:px-[77px]">
       <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-8">
         Precio
       </p>
-      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: '73px' }}>
+      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: 'clamp(42px, 8vw, 73px)' }}>
         UN LUGAR.<br />
         UN{' '}
         <span className="text-purple">PRECIO.</span>
       </h2>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Early Bird */}
         <div className="bg-purple rounded-2xl p-10 relative overflow-hidden">
           <div className="absolute top-[22px] right-[22px] bg-lime px-3 py-1 rounded-full">

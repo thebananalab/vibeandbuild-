@@ -27,19 +27,19 @@ const CARDS = [
 
 export default function ForWho() {
   return (
-    <section className="bg-cream py-24 px-[77px]">
+    <section className="bg-cream py-16 px-5 sm:px-8 lg:px-[77px]">
       <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-8">
         ¿Para quién?
       </p>
-      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: '73px' }}>
+      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: 'clamp(42px, 8vw, 73px)' }}>
         ESTE WORKSHOP<br />
         ES PARA{' '}
         <span className="text-purple">TI.</span>
       </h2>
 
-      <div className="grid grid-cols-4 border border-[rgba(28,28,28,0.08)] rounded-sm overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 border border-[rgba(28,28,28,0.08)] rounded-sm overflow-hidden">
         {CARDS.map((card, i) => (
-          <div key={i} className="bg-cream p-6 border-r border-[rgba(28,28,28,0.08)] last:border-r-0">
+          <div key={i} className="bg-cream p-6 border-b xl:border-b-0 border-r-0 xl:border-r border-[rgba(28,28,28,0.08)] last:border-0 xl:last:border-r-0">
             <div className={`${card.iconBg} size-9 rounded-[18px] flex items-center justify-center mb-6`}>
               <img src={card.img} alt="" className="size-6 object-contain" />
             </div>

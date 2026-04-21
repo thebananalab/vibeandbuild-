@@ -57,18 +57,18 @@ const TOOLS = [
 
 export default function WhatYoullBuild() {
   return (
-    <section className="bg-light-bg py-24 px-[77px]">
+    <section className="bg-light-bg py-16 px-5 sm:px-8 lg:px-[77px]">
       <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-8">
         Lo que construirás
       </p>
-      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: '73px' }}>
+      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: 'clamp(42px, 8vw, 73px)' }}>
         TOOLS QUE EXISTEN<br />
         PORQUE{' '}
         <span className="text-purple">TÚ</span>
         {' '}LAS HACES.
       </h2>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {TOOLS.map((tool) => (
           <div key={tool.num} className="bg-white border border-[rgba(28,28,28,0.06)] rounded-2xl overflow-hidden relative flex flex-col justify-between pt-7 px-7 pb-0" style={{ minHeight: '228px' }}>
             <div>

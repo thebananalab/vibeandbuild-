@@ -27,8 +27,8 @@ const FAQS = [
 
 export default function FAQ() {
   return (
-    <section className="bg-light-bg py-24 px-[77px]">
-      <div className="grid grid-cols-[412px_1fr] gap-24">
+    <section className="bg-light-bg py-16 px-5 sm:px-8 lg:px-[77px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[412px_1fr] gap-12 lg:gap-24">
         {/* Left */}
         <div>
           <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-6">

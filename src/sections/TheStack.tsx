@@ -39,17 +39,17 @@ const STACK = [
 
 export default function TheStack() {
   return (
-    <section className="bg-cream py-24 px-[77px]">
+    <section className="bg-cream py-16 px-5 sm:px-8 lg:px-[77px]">
       <p className="font-dm font-medium text-[11.52px] tracking-[1.38px] uppercase text-[#8a8a8a] mb-8">
         El stack
       </p>
-      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: '73px' }}>
+      <h2 className="font-bebas text-dark leading-[0.92] tracking-[1.47px] mb-16" style={{ fontSize: 'clamp(42px, 8vw, 73px)' }}>
         4 TOOLS.<br />
         TODO LO QUE{' '}
         <span className="text-purple">NECESITAS.</span>
       </h2>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {STACK.map((item) => (
           <div key={item.name} className="bg-white border border-[rgba(28,28,28,0.06)] rounded-2xl p-6">
             <div className={`${item.iconBg} size-11 rounded-[12px] flex items-center justify-center mb-6`}>
