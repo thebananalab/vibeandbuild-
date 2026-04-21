@@ -61,7 +61,7 @@ export default function Hero() {
           className="absolute"
           style={{ top: '127px', left: '1065px', width: '117px', height: '117px' }}
         >
-          <img src="/assets/Lightning Bolt Icon_heart_1.svg" alt="" className="size-full object-contain" />
+          <img src="/assets/heart.svg" alt="" className="size-full object-contain" />
         </div>
 
         {/* Spark / starburst */}
@@ -77,7 +77,7 @@ export default function Hero() {
           className="absolute"
           style={{ top: '210px', left: '830px', width: '95px', height: '130px' }}
         >
-          <img src="/assets/Lightning Bolt Icon_bolt_1.svg" alt="" className="size-full object-contain" />
+          <img src="/assets/bolt.svg" alt="" className="size-full object-contain" />
         </div>
 
         {/* Star */}
@@ -85,7 +85,7 @@ export default function Hero() {
           className="absolute"
           style={{ top: '250px', left: '1060px', width: '100px', height: '100px' }}
         >
-          <img src="/assets/Lightning Bolt Icon_star_1.svg" alt="" className="size-full object-contain" />
+          <img src="/assets/star.svg" alt="" className="size-full object-contain" />
         </div>
 
         {/* Spark_2 decoration */}
