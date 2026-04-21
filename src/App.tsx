@@ -10,7 +10,7 @@ import Footer from './sections/Footer'
 
 export default function App() {
   return (
-    <main className="bg-cream min-w-[1454px] overflow-x-auto">
+    <main className="bg-cream">
       <Hero />
       <Marquee />
       <ForWho />
