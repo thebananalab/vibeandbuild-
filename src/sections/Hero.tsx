@@ -1,11 +1,9 @@
 export default function Hero() {
   return (
-    <section
-      className="bg-cream border-b border-[rgba(28,28,28,0.1)] relative overflow-hidden"
-      style={{ width: '1454px', height: '855px' }}
-    >
+    <section className="bg-cream border-b border-[rgba(28,28,28,0.1)] relative overflow-hidden">
+
       {/* ── Nav ── */}
-      <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-10 py-5 z-10">
+      <nav className="flex items-center justify-between px-10 py-5 relative z-10">
         <span className="font-bebas text-dark tracking-widest text-xl">VIBE & BLOOM</span>
         <a
           href="https://luma.com/ign5s37r"
@@ -15,160 +13,152 @@ export default function Hero() {
         </a>
       </nav>
 
-      {/* ── Large type (inner container y=72) ── */}
-      {/* VIBE: left=40, top=72+100=172 */}
-      <div
-        className="absolute font-bebas leading-[0] left-[40px] whitespace-nowrap select-none"
-        style={{ top: '172px', fontSize: '275px', letterSpacing: '5.5px' }}
-      >
-        <p className="text-dark mb-0" style={{ lineHeight: '242px' }}>VIBE</p>
-        <p className="text-purple" style={{ lineHeight: '242px' }}>&amp; BLOOM</p>
-      </div>
+      {/* ── Body: two columns ── */}
+      <div className="flex items-stretch min-h-[640px]">
 
-      {/* Subtitle: left=40, top=72+584=656 */}
-      <p
-        className="absolute font-dm font-normal text-dark left-[40px]"
-        style={{ top: '656px', fontSize: '16px', lineHeight: '22.96px', width: '755px' }}
-      >
-        Tu idea, tu app, tu vibe. Aprende a construir sin código aunque nunca hayas programado en tu vida.
-      </p>
+        {/* Left: text */}
+        <div className="relative w-[52%] flex flex-col justify-between pl-10 pr-8 pb-16 pt-16">
 
-      {/* ── Sticker images (exact Figma positions) ── */}
-
-      {/* Heart — 40:1326 — left=1065, top=72+127=199, w=117, h=108 */}
-      <img
-        src="/assets/heart.svg"
-        alt=""
-        className="absolute pointer-events-none"
-        style={{ left: '1065px', top: '199px', width: '117px', height: '108px' }}
-      />
-
-      {/* Bolt — 40:1325 — left=925, top=290, w=125, h=164 */}
-      <img
-        src="/assets/bolt.svg"
-        alt=""
-        className="absolute pointer-events-none"
-        style={{ left: '925px', top: '290px', width: '125px', height: '164px' }}
-      />
-
-      {/* Star — 40:1320 — left=1208, top=72+258=330, w=141, h=141 */}
-      <img
-        src="/assets/star.svg"
-        alt=""
-        className="absolute pointer-events-none"
-        style={{ left: '1208px', top: '330px', width: '141px', height: '141px' }}
-      />
-
-      {/* Spark_2 — 40:1327 — left=956, top=72+466=538, w=136, h=135 */}
-      <img
-        src="/assets/Spark_2.svg"
-        alt=""
-        className="absolute pointer-events-none"
-        style={{ left: '956px', top: '538px', width: '136px', height: '135px' }}
-      />
-
-      {/* ── Pill badges ── */}
-
-      {/* SIN CÓDIGO — left=917, top=72+120=192, w=107, h=32 */}
-      <div
-        className="absolute bg-lime border-[1.5px] border-black rounded-full flex items-center justify-center"
-        style={{ left: '917px', top: '192px', width: '107px', height: '32px' }}
-      >
-        <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase">
-          SIN código
-        </span>
-      </div>
-
-      {/* FREELANCERS — center at left=754, top=72+373=445, w=98, h=63, rotate 20.64deg */}
-      <div
-        className="absolute flex items-center justify-center"
-        style={{ left: '754px', top: '445px', width: '98px', height: '63px' }}
-      >
-        <div style={{ transform: 'rotate(20.64deg)' }}>
+          {/* AGENCIAS badge — floats near top-left of text */}
           <div
-            className="bg-pink border-[1.5px] border-black rounded-full flex items-center justify-center px-4"
-            style={{ height: '32px', whiteSpace: 'nowrap' }}
+            className="absolute z-10"
+            style={{ top: '60px', left: '7px', transform: 'rotate(-16.21deg)' }}
           >
-            <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase">
-              freelancers
+            <div className="bg-lime border-[2.5px] border-dark rounded-full flex items-center justify-center"
+              style={{ height: '36px', width: '82px' }}>
+              <span className="font-bebas text-dark text-[14.4px]">AGENCIAS</span>
+            </div>
+          </div>
+
+          {/* Heading */}
+          <div
+            className="font-bebas leading-[0.88] whitespace-nowrap select-none"
+            style={{ fontSize: 'clamp(72px, 17vw, 260px)', letterSpacing: '0.02em' }}
+          >
+            <p className="text-dark mb-0">VIBE</p>
+            <p className="text-purple">&amp; BLOOM</p>
+          </div>
+
+          {/* Subtitle + CTAs */}
+          <div className="mt-8 space-y-6">
+            <p className="font-dm font-normal text-dark text-base leading-[1.44] max-w-xl">
+              Tu idea, tu app, tu vibe. Aprende a construir sin código aunque nunca hayas programado en tu vida.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="https://luma.com/ign5s37r"
+                className="bg-purple font-dm font-medium text-white text-[12.5px] tracking-[1.25px] uppercase rounded-full flex items-center px-7 hover:opacity-90 transition-opacity"
+                style={{ height: '44px' }}
+              >
+                Reservar mi lugar →
+              </a>
+              <div className="bg-lime border-[1.5px] border-dark rounded-full flex items-center px-4" style={{ height: '32px' }}>
+                <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">
+                  SOLO 10–15 LUGARES ✦ MAYO 9 2026
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: sticker field — percentage-positioned within container */}
+        <div className="flex-1 relative" style={{ minHeight: '560px' }}>
+          {/*
+            All sticker positions as % of this container.
+            Original sticker area: ~804px wide × ~648px tall.
+            Offsets: container starts at x≈650 in 1454px design, y≈72.
+            Formula: left% = (figmaX - 650) / 804, top% = (figmaY - 72) / 648
+          */}
+
+          {/* SIN CÓDIGO — 33% / 19% */}
+          <div
+            className="absolute bg-lime border-[1.5px] border-black rounded-full flex items-center justify-center"
+            style={{ left: '33%', top: '19%', width: '14%', height: '5%', minHeight: '28px', minWidth: '95px' }}
+          >
+            <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">
+              SIN código
+            </span>
+          </div>
+
+          {/* Heart — 52% / 20% — w=14.6% */}
+          <img
+            src="/assets/heart.svg"
+            alt=""
+            className="absolute pointer-events-none"
+            style={{ left: '52%', top: '20%', width: '14.6%' }}
+          />
+
+          {/* 3.5 HORAS badge — 84% / 21% — w=17.8% */}
+          <div
+            className="absolute flex items-center justify-center"
+            style={{ right: '0%', top: '21%', width: '17.8%', aspectRatio: '1' }}
+          >
+            <div className="relative size-full" style={{ transform: 'rotate(13.65deg)' }}>
+              <div className="absolute inset-0 bg-purple border-[8px] border-white rounded-[30%]" />
+              <div className="absolute inset-[6%] bg-pink border-[3px] border-dark rounded-[30%] flex items-center justify-center">
+                <div className="font-bebas text-dark text-center leading-tight" style={{ fontSize: 'clamp(14px, 2.2vw, 28px)', letterSpacing: '0.58px' }}>
+                  <div>3.5</div>
+                  <div>HORAS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bolt — 34% / 34% — w=15.5% */}
+          <img
+            src="/assets/bolt.svg"
+            alt=""
+            className="absolute pointer-events-none"
+            style={{ left: '34%', top: '34%', width: '15.5%' }}
+          />
+
+          {/* Star — 69% / 40% — w=17.5% */}
+          <img
+            src="/assets/star.svg"
+            alt=""
+            className="absolute pointer-events-none"
+            style={{ left: '69%', top: '40%', width: '17.5%' }}
+          />
+
+          {/* FREELANCERS pill — 13% / 58% */}
+          <div
+            className="absolute flex items-center justify-center"
+            style={{ left: '13%', top: '58%' }}
+          >
+            <div style={{ transform: 'rotate(20.64deg)' }}>
+              <div className="bg-pink border-[1.5px] border-black rounded-full flex items-center justify-center px-4" style={{ height: '32px', whiteSpace: 'nowrap' }}>
+                <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase">
+                  freelancers
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Spark_2 — 38% / 72% — w=16.9% */}
+          <img
+            src="/assets/Spark_2.svg"
+            alt=""
+            className="absolute pointer-events-none"
+            style={{ left: '38%', top: '72%', width: '16.9%' }}
+          />
+
+          {/* PARA CREATIVAS — 63% / 87% */}
+          <div
+            className="absolute bg-purple border-[1.5px] border-dark rounded-full flex items-center justify-center"
+            style={{ left: '63%', top: '87%', width: '18%', height: '5%', minHeight: '28px', minWidth: '130px' }}
+          >
+            <span className="font-dm font-bold text-lime text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">
+              PARA CREATIVAS
             </span>
           </div>
         </div>
       </div>
 
-      {/* PARA CREATIVAS — left=1158, top=72+575=647, w=106, h=32 */}
-      <div
-        className="absolute bg-purple border-[1.5px] border-dark rounded-full flex items-center justify-center"
-        style={{ left: '1158px', top: '647px', width: '137px', height: '32px' }}
-      >
-        <span className="font-dm font-bold text-lime text-[10.88px] tracking-[0.87px] uppercase">
-          PARA CREATIVAS
-        </span>
-      </div>
-
-      {/* AGENCIAS — left=7, top=235, w=89, h=57, rotate -16.21deg */}
-      <div
-        className="absolute flex items-center justify-center"
-        style={{ left: '7px', top: '235px', width: '89px', height: '57px' }}
-      >
-        <div style={{ transform: 'rotate(-16.21deg)' }}>
-          <div
-            className="bg-lime border-[2.5px] border-dark rounded-full flex items-center justify-center"
-            style={{ height: '36px', width: '82px' }}
-          >
-            <span className="font-bebas text-dark text-[14.4px]">AGENCIAS</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 3.5 HORAS badge — left=1323, top=208, w=143, h=143, rotate 13.65deg */}
-      <div
-        className="absolute flex items-center justify-center"
-        style={{ left: '1323px', top: '208px', width: '143px', height: '143px' }}
-      >
-        <div className="relative" style={{ transform: 'rotate(13.65deg)', width: '118px', height: '118px' }}>
-          <div className="absolute inset-0 bg-purple border-[10px] border-white rounded-[90px]" />
-          <div className="absolute inset-[5px] bg-pink border-4 border-dark rounded-[75px] flex items-center justify-center">
-            <div className="font-bebas text-dark text-center" style={{ fontSize: '28.9px', lineHeight: '1.1', letterSpacing: '0.58px' }}>
-              <div>3.5</div>
-              <div>HORAS</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── CTAs — top=718, left=40 ── */}
-      <div className="absolute flex items-center gap-4" style={{ top: '718px', left: '40px' }}>
-        <a
-          href="https://luma.com/ign5s37r"
-          className="bg-purple font-dm font-medium text-white text-[12.48px] tracking-[1.25px] uppercase rounded-full flex items-center px-7 hover:opacity-90 transition-opacity"
-          style={{ height: '44px' }}
-        >
-          Reservar mi lugar →
-        </a>
-        <div
-          className="bg-lime border-[1.5px] border-dark rounded-full flex items-center px-4"
-          style={{ height: '32px' }}
-        >
-          <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">
-            SOLO 10–15 LUGARES ✦ MAYO 9 2026
-          </span>
-        </div>
-      </div>
-
-      {/* ── Bottom info bar — top=811 ── */}
-      <div
-        className="absolute bg-dark left-0 right-0 flex items-center"
-        style={{ top: '811px', height: '44px' }}
-      >
-        {[
-          'Workshop virtual en vivo',
-          '3.5 horas',
-          'Claude + GitHub + Vercel + Firebase',
-          'Sin código',
-        ].map((item, i) => (
+      {/* ── Bottom info bar ── */}
+      <div className="bg-dark flex items-center" style={{ height: '44px' }}>
+        {['Workshop virtual en vivo', '3.5 horas', 'Claude + GitHub + Vercel + Firebase', 'Sin código'].map((item, i) => (
           <span key={i} className="flex items-center">
-            <span className="font-dm font-medium text-lime text-[10.88px] tracking-[1.09px] uppercase ml-10">
+            <span className="font-dm font-medium text-lime text-[10.88px] tracking-[1.09px] uppercase ml-10 whitespace-nowrap">
               {item}
             </span>
             {i < 3 && <span className="text-purple text-base ml-10">✦</span>}
