@@ -43,7 +43,7 @@ export default function Hero() {
 
       {/* Spark decoration */}
       <div className="absolute" style={{ right: '9.5%', top: '42.7%' }}>
-        <span className="text-purple font-bebas text-3xl">✦</span>
+        <img src="/assets/Spark_2.svg" alt="" className="size-8" />
       </div>
     </section>
   )
