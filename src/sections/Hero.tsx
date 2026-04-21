@@ -8,7 +8,7 @@ export default function Hero() {
       <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-10 py-5 z-10">
         <span className="font-bebas text-dark tracking-widest text-xl">VIBE & BLOOM</span>
         <a
-          href="#pricing"
+          href="https://luma.com/ign5s37r"
           className="bg-dark text-cream font-dm font-medium text-[11px] tracking-[1.1px] uppercase px-5 py-3 rounded-full hover:bg-purple transition-colors"
         >
           Reservar lugar →
@@ -161,7 +161,7 @@ export default function Hero() {
       {/* CTAs */}
       <div className="absolute" style={{ top: '718px', left: '40px', display: 'flex', gap: '16px', alignItems: 'center' }}>
         <a
-          href="#pricing"
+          href="https://luma.com/ign5s37r"
           className="bg-purple font-dm font-medium text-white text-[12.48px] tracking-[1.25px] uppercase rounded-full flex items-center px-7"
           style={{ height: '44px' }}
         >

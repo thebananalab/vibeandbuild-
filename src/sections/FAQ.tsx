@@ -42,7 +42,7 @@ export default function FAQ() {
             Si no encuentras lo que buscas, escríbenos directamente.
           </p>
           <a
-            href="#pricing"
+            href="https://luma.com/ign5s37r"
             className="inline-block bg-dark text-cream font-dm font-medium text-[11.5px] tracking-[1.15px] uppercase px-5 py-[11px] rounded-full hover:bg-purple transition-colors"
           >
             Ya estoy lista →

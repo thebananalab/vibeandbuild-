@@ -53,7 +53,7 @@ export default function Pricing() {
           </ul>
 
           <a
-            href="#"
+            href="https://luma.com/ign5s37r"
             className="bg-lime flex items-center justify-between px-6 h-[56px] rounded-full hover:opacity-90 transition-opacity"
           >
             <span className="font-dm font-bold text-dark text-[12px] tracking-[1.2px] uppercase">
@@ -95,7 +95,7 @@ export default function Pricing() {
           </div>
 
           <a
-            href="#"
+            href="https://luma.com/ign5s37r"
             className="bg-dark flex items-center justify-between px-6 h-[56px] rounded-full hover:bg-purple transition-colors"
           >
             <span className="font-dm font-bold text-white text-[12px] tracking-[1.2px] uppercase">
