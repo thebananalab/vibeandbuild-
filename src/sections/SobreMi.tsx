@@ -4,10 +4,7 @@ const EXPERTISE = [
   { label: 'Identidad Visual', color: 'bg-pink text-dark' },
   { label: 'Midjourney · 2+ años · 50+ proyectos', color: 'bg-[rgba(130,109,238,0.25)] text-purple border border-purple' },
   { label: 'Adobe Firefly', color: 'bg-[rgba(255,153,220,0.3)] text-pink border border-pink' },
-  { label: 'Sora · Runway', color: 'bg-lime text-dark' },
   { label: 'Brand Strategy', color: 'bg-purple text-white' },
-  { label: 'Liderazgo Creativo', color: 'bg-[rgba(216,243,130,0.25)] text-lime border border-lime' },
-  { label: 'Scalable Production 10×', color: 'bg-pink text-dark' },
   { label: 'Pipelines de IA', color: 'bg-[rgba(130,109,238,0.25)] text-purple border border-purple' },
 ]
 
