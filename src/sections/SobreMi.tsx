@@ -26,6 +26,20 @@ export default function SobreMi() {
 
         {/* Left */}
         <div>
+          {/* Photo */}
+          <div className="mb-8">
+            <div className="relative inline-block">
+              <img
+                src="/assets/RoseDays.jpg"
+                alt="Laura Rosa Díaz Cañas"
+                className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] rounded-[24px] object-cover object-top"
+              />
+              <div className="absolute -bottom-3 -right-3 bg-lime border-[2px] border-dark rounded-full px-3 py-1">
+                <span className="font-bebas text-dark text-[13px] tracking-[0.5px]">Rose Days</span>
+              </div>
+            </div>
+          </div>
+
           {/* Name block */}
           <div className="mb-8">
             <h2
@@ -36,11 +50,6 @@ export default function SobreMi() {
               <span className="text-purple">DÍAZ CAÑAS</span>
             </h2>
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="bg-lime px-4 py-1 rounded-full">
-                <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase">
-                  Rose Days
-                </span>
-              </div>
               <span className="font-dm font-light text-[rgba(255,255,255,0.5)] text-sm">
                 Creative AI Specialist & Brand Leader
               </span>
