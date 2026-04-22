@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="flex flex-col md:flex-row md:items-stretch md:min-h-[640px]">
 
         {/* Text column */}
-        <div className="relative md:w-[52%] flex flex-col gap-6 px-5 sm:px-10 pt-6 md:pt-16 pb-10 md:pb-16">
+        <div className="relative md:w-[52%] flex flex-col gap-6 md:gap-0 md:justify-between px-5 sm:px-10 pt-6 md:pt-16 pb-10 md:pb-16">
 
           {/* AGENCIAS badge — desktop only */}
           <div
