@@ -3,6 +3,7 @@ import Marquee from './sections/Marquee'
 import ForWho from './sections/ForWho'
 import WhatYoullBuild from './sections/WhatYoullBuild'
 import TheStack from './sections/TheStack'
+import SobreMi from './sections/SobreMi'
 import Curriculum from './sections/Curriculum'
 import Pricing from './sections/Pricing'
 import FAQ from './sections/FAQ'
@@ -16,6 +17,7 @@ export default function App() {
       <ForWho />
       <WhatYoullBuild />
       <TheStack />
+      <SobreMi />
       <Curriculum />
       <Pricing />
       <FAQ />
