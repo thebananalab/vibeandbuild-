@@ -55,7 +55,7 @@ export default function SobreMi() {
             </h2>
             <div className="flex items-center gap-3 flex-wrap">
               <span className="font-dm font-light text-[rgba(255,255,255,0.5)] text-sm">
-                Creative AI Specialist & Brand Leader
+                Creative AI Specialist &amp; Brand Leader
               </span>
             </div>
           </div>
@@ -63,8 +63,7 @@ export default function SobreMi() {
           {/* Bio */}
           <p className="font-dm font-light text-[rgba(255,255,255,0.7)] text-[15px] leading-[26px] mb-8 max-w-lg">
             10+ años construyendo marcas y liderando equipos creativos en Europa y Latinoamérica.
-            Ahora especializada en dirección de arte dentro de pipelines de IA — manteniendo identidad
-            de brand mientras escalas con herramientas generativas.
+            Ahora especializada en dirección de arte dentro de flujos y herramientas con IA.
           </p>
 
           {/* Expertise pills */}
