@@ -33,7 +33,7 @@ export default function Hero() {
           {/* Heading */}
           <div
             className="font-bebas leading-[0.88] select-none"
-            style={{ fontSize: 'clamp(72px, 11vw, 150px)', letterSpacing: '0.02em' }}
+            style={{ fontSize: 'clamp(72px, 11vw, 210px)', letterSpacing: '0.02em' }}
           >
             <p className="text-dark mb-0">VIBE</p>
             <p className="text-purple">&amp; BLOOM</p>
