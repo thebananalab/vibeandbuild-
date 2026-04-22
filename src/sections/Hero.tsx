@@ -13,13 +13,13 @@ export default function Hero() {
         </a>
       </nav>
 
-      {/* ── Body: two columns ── */}
-      <div className="flex items-stretch min-h-[480px] md:min-h-[640px]">
+      {/* ── Body ── */}
+      <div className="flex flex-col md:flex-row md:items-stretch md:min-h-[640px]">
 
-        {/* Left: text */}
-        <div className="relative w-full md:w-[52%] flex flex-col justify-between pl-5 sm:pl-10 pr-5 sm:pr-8 pb-12 md:pb-16 pt-12 md:pt-16">
+        {/* Text column */}
+        <div className="relative md:w-[52%] flex flex-col gap-6 px-5 sm:px-10 pt-6 md:pt-16 pb-10 md:pb-16">
 
-          {/* AGENCIAS badge — floats near top-left of text */}
+          {/* AGENCIAS badge — desktop only */}
           <div
             className="hidden md:block absolute z-10"
             style={{ top: '60px', left: '7px', transform: 'rotate(-16.21deg)' }}
@@ -32,15 +32,27 @@ export default function Hero() {
 
           {/* Heading */}
           <div
-            className="font-bebas leading-[0.88] whitespace-nowrap select-none"
-            style={{ fontSize: 'clamp(72px, 17vw, 260px)', letterSpacing: '0.02em' }}
+            className="font-bebas leading-[0.88] select-none"
+            style={{ fontSize: 'clamp(80px, 20vw, 260px)', letterSpacing: '0.02em' }}
           >
             <p className="text-dark mb-0">VIBE</p>
             <p className="text-purple">&amp; BLOOM</p>
           </div>
 
+          {/* Mobile sticker strip — hidden on desktop */}
+          <div className="flex md:hidden items-center gap-3 flex-wrap">
+            <div className="bg-lime border-[1.5px] border-dark rounded-full flex items-center px-4" style={{ height: '30px' }}>
+              <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">SIN código</span>
+            </div>
+            <img src="/assets/heart.svg" alt="" className="h-9 pointer-events-none" />
+            <div className="bg-pink border-[1.5px] border-black rounded-full flex items-center px-4" style={{ height: '30px', transform: 'rotate(4deg)' }}>
+              <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">FREELANCERS</span>
+            </div>
+            <img src="/assets/bolt.svg" alt="" className="h-9 pointer-events-none" />
+          </div>
+
           {/* Subtitle + CTAs */}
-          <div className="mt-8 space-y-6">
+          <div className="space-y-4">
             <p className="font-dm font-normal text-dark text-base leading-[1.44] max-w-xl">
               Tu idea, tu app, tu vibe. Aprende a construir sin código aunque nunca hayas programado en tu vida.
             </p>
@@ -61,14 +73,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right: sticker field — percentage-positioned within container */}
+        {/* Right: sticker field — desktop only */}
         <div className="hidden md:block flex-1 relative" style={{ minHeight: '560px' }}>
-          {/*
-            All sticker positions as % of this container.
-            Original sticker area: ~804px wide × ~648px tall.
-            Offsets: container starts at x≈650 in 1454px design, y≈72.
-            Formula: left% = (figmaX - 650) / 804, top% = (figmaY - 72) / 648
-          */}
 
           {/* SIN CÓDIGO — 33% / 19% */}
           <div
@@ -88,7 +94,7 @@ export default function Hero() {
             style={{ left: '52%', top: '20%', width: '14.6%' }}
           />
 
-          {/* 3.5 HORAS badge — 84% / 21% — w=17.8% */}
+          {/* 3.5 HORAS badge — right=0% / 21% — w=17.8% */}
           <div
             className="absolute flex items-center justify-center"
             style={{ right: '0%', top: '21%', width: '17.8%', aspectRatio: '1' }}
@@ -155,9 +161,9 @@ export default function Hero() {
       </div>
 
       {/* ── Bottom info bar ── */}
-      <div className="bg-dark flex items-center" style={{ height: '44px' }}>
+      <div className="bg-dark flex items-center overflow-x-auto" style={{ height: '44px' }}>
         {['Workshop virtual en vivo', '3.5 horas', 'Claude + GitHub + Vercel + Firebase', 'Sin código'].map((item, i) => (
-          <span key={i} className="flex items-center">
+          <span key={i} className="flex items-center shrink-0">
             <span className="font-dm font-medium text-lime text-[10.88px] tracking-[1.09px] uppercase ml-10 whitespace-nowrap">
               {item}
             </span>
