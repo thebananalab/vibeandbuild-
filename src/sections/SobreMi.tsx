@@ -1,18 +1,22 @@
 const EXPERTISE = [
   { label: 'Dirección de Arte + IA', color: 'bg-purple text-white' },
   { label: 'Vibe Coding', color: 'bg-lime text-dark border border-dark' },
-  { label: 'Midjourney · 2+ años', color: 'bg-[rgba(130,109,238,0.12)] text-purple' },
-  { label: 'Adobe Firefly · Sora · Runway', color: 'bg-[rgba(28,28,28,0.06)] text-dark' },
-  { label: 'Brand & Strategy', color: 'bg-pink text-dark border border-[rgba(28,28,28,0.1)]' },
-  { label: '10+ años en branding', color: 'bg-[rgba(28,28,28,0.06)] text-dark' },
+  { label: 'Identidad Visual', color: 'bg-pink text-dark' },
+  { label: 'Midjourney · 2+ años · 50+ proyectos', color: 'bg-[rgba(130,109,238,0.25)] text-purple border border-purple' },
+  { label: 'Adobe Firefly', color: 'bg-[rgba(255,153,220,0.3)] text-pink border border-pink' },
+  { label: 'Sora · Runway', color: 'bg-lime text-dark' },
+  { label: 'Brand Strategy', color: 'bg-purple text-white' },
+  { label: 'Liderazgo Creativo', color: 'bg-[rgba(216,243,130,0.25)] text-lime border border-lime' },
+  { label: 'Scalable Production 10×', color: 'bg-pink text-dark' },
+  { label: 'Pipelines de IA', color: 'bg-[rgba(130,109,238,0.25)] text-purple border border-purple' },
 ]
 
 const BADGES = [
-  { name: 'Fermat.app', role: 'Ambassador', bg: 'bg-dark', text: 'text-lime' },
-  { name: 'Flora Fauna AI', role: 'Ambassador', bg: 'bg-purple', text: 'text-white' },
-  { name: 'House of Prompt', role: '1st Place · Fantasy', bg: 'bg-lime', text: 'text-dark' },
-  { name: 'AIMA 2026', role: 'Official Selection · Fashion', bg: 'bg-pink', text: 'text-dark' },
-  { name: 'CreAtiva AI Art Book', role: 'Selected Artist · Vol.9', bg: 'bg-[rgba(28,28,28,0.06)]', text: 'text-dark' },
+  { name: 'Fermat.app', role: 'Ambassador', bg: 'bg-purple', text: 'text-lime' },
+  { name: 'Flora Fauna AI', role: 'Ambassador', bg: 'bg-lime', text: 'text-dark' },
+  { name: 'House of Prompt', role: '1st Place · Fantasy', bg: 'bg-pink', text: 'text-dark' },
+  { name: 'AIMA 2026', role: 'Official Selection · Fashion', bg: 'bg-[rgba(130,109,238,0.25)] border border-purple', text: 'text-white' },
+  { name: 'CreAtiva AI Art Book', role: 'Selected Artist · Vol.9', bg: 'bg-[rgba(216,243,130,0.15)] border border-lime', text: 'text-lime' },
 ]
 
 export default function SobreMi() {
