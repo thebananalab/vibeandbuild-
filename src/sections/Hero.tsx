@@ -33,22 +33,26 @@ export default function Hero() {
           {/* Heading */}
           <div
             className="font-bebas leading-[0.88] select-none"
-            style={{ fontSize: 'clamp(80px, 20vw, 260px)', letterSpacing: '0.02em' }}
+            style={{ fontSize: 'clamp(72px, 11vw, 150px)', letterSpacing: '0.02em' }}
           >
             <p className="text-dark mb-0">VIBE</p>
             <p className="text-purple">&amp; BLOOM</p>
           </div>
 
           {/* Mobile sticker strip — hidden on desktop */}
-          <div className="flex md:hidden items-center gap-3 flex-wrap">
+          <div className="flex md:hidden items-center gap-2 flex-wrap">
             <div className="bg-lime border-[1.5px] border-dark rounded-full flex items-center px-4" style={{ height: '30px' }}>
               <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">SIN código</span>
             </div>
-            <img src="/assets/heart.svg" alt="" className="h-9 pointer-events-none" />
-            <div className="bg-pink border-[1.5px] border-black rounded-full flex items-center px-4" style={{ height: '30px', transform: 'rotate(4deg)' }}>
-              <span className="font-dm font-bold text-black text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">FREELANCERS</span>
+            <div className="bg-purple rounded-full flex items-center px-4" style={{ height: '30px' }}>
+              <span className="font-dm font-bold text-white text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">3.5 HORAS</span>
             </div>
-            <img src="/assets/bolt.svg" alt="" className="h-9 pointer-events-none" />
+            <div className="bg-pink border-[1.5px] border-dark rounded-full flex items-center px-4" style={{ height: '30px' }}>
+              <span className="font-dm font-bold text-dark text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">MAYO 9 · 2026</span>
+            </div>
+            <div className="bg-dark rounded-full flex items-center px-4" style={{ height: '30px' }}>
+              <span className="font-dm font-bold text-lime text-[10.88px] tracking-[0.87px] uppercase whitespace-nowrap">10–15 LUGARES</span>
+            </div>
           </div>
 
           {/* Subtitle + CTAs */}
