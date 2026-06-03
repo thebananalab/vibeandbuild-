@@ -200,9 +200,9 @@
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 3rem;
-      align-items: end;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
     }
 
     .hero-eyebrow {
@@ -239,21 +239,22 @@
     .hero-title .line-2 {
       color: var(--purple);
       display: block;
-      position: relative;
     }
     .hero-title .line-3 {
       display: block;
-      -webkit-text-stroke: 2.5px var(--dark);
-      color: transparent;
-      position: relative;
+      color: var(--dark);
     }
-    .hero-title .line-4 { color: var(--dark); display: block; }
+    .hero-title .line-4 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 4px var(--purple);
+      paint-order: stroke fill;
+    }
 
     .hero-right {
-      padding-bottom: 0.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .hero-desc {
