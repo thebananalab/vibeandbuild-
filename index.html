@@ -82,7 +82,20 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.5rem 3rem;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
+    nav.scrolled {
+      background: rgba(28,28,28,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+    nav.scrolled .nav-logo { color: var(--cream); }
+    nav.scrolled .nav-link { color: var(--cream); }
+    nav.scrolled .nav-cta { background: var(--lime); color: var(--dark); }
+    nav.scrolled .nav-cta:hover { background: var(--purple); color: #fff; }
 
     .nav-logo {
       font-family: var(--bebas);
@@ -379,6 +392,7 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
 
     /* ── SECTIONS BASE ── */
     section { position: relative; }
@@ -525,10 +539,21 @@
     .fase-card {
       background: #1e1e1e;
       padding: 2.5rem;
-      transition: background 0.2s;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
       position: relative;
       overflow: hidden;
     }
+    .fase-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--purple);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s ease;
+    }
+    .fase-card:hover::after { transform: scaleY(1); }
     .fase-card::before {
       content: attr(data-num);
       position: absolute;
@@ -864,6 +889,12 @@
       position: relative;
       overflow: hidden;
     }
+    .cta-section .eyebrow.dark {
+      color: rgba(28,28,28,0.55);
+    }
+    .cta-section .eyebrow.dark::before {
+      background: rgba(28,28,28,0.3);
+    }
 
     .cta-bg-text {
       position: absolute;
@@ -968,7 +999,7 @@
       .nav-links .nav-link { display: none; }
       .hero { padding: 6.5rem 1.5rem 3.5rem; }
       .hero-content { grid-template-columns: 1fr; }
-      .hero-right { order: -1; }
+      .hero-right { order: 1; }
       .section-inner { padding: 5rem 1.5rem; }
       .for-who-grid, .fases-header, .get-grid, .prep-grid, .sobre-layout { grid-template-columns: 1fr; gap: 3rem; }
       .agenda-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -1437,7 +1468,6 @@
   <div class="cta-bg-text" aria-hidden="true">BLOOM</div>
   <div class="cta-inner">
     <div class="eyebrow dark" style="justify-content:center;margin-bottom:1.5rem;">
-      <span style="background:rgba(28,28,28,0.3)"></span>
       Taller presencial · Barcelona · Plazas limitadas
     </div>
     <h2 class="cta-title">¿Nos vemos<br>en el taller?</h2>
@@ -1458,6 +1488,15 @@
 </footer>
 
 <script>
+  // Scroll-aware nav
+  const nav = document.querySelector('nav');
+  const heroHeight = document.querySelector('.hero')?.offsetHeight ?? 400;
+  function updateNav() {
+    nav?.classList.toggle('scrolled', window.scrollY > heroHeight * 0.15);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
   // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
