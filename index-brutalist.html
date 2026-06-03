@@ -1,0 +1,1459 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Vibe & Bloom — Taller de flujos de IA para creativos. Sin miedo, con flujo. Barcelona."/>
+  <title>VIBE & BLOOM // SYS-01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F4F4F0;
+      --ink: #050505;
+      --red: #E61919;
+      --macro: 'Archivo Black', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ── GRAIN ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: var(--bg);
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: stretch;
+      height: 52px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-right: 1px solid var(--ink);
+    }
+
+    .nav-logo {
+      font-family: var(--macro);
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0 1.5rem;
+      border-right: 1px solid var(--ink);
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-ref {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.35;
+      padding: 0 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .nav-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid var(--ink);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-link:hover { background: var(--ink); color: var(--bg); }
+
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--ink);
+      text-decoration: none;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      border-left: 2px solid var(--ink);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-cta:hover { background: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 52px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Big bleed number */
+    .hero-bg-num {
+      position: absolute;
+      right: -0.05em;
+      bottom: -0.1em;
+      font-family: var(--macro);
+      font-size: clamp(18rem, 38vw, 56rem);
+      line-height: 0.85;
+      color: var(--ink);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-meta-strip {
+      border-bottom: 1px solid var(--ink);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-meta-cell {
+      padding: 0.7rem 1.5rem;
+      border-right: 1px solid var(--ink);
+    }
+    .hero-meta-cell:last-child { border-right: none; }
+    .hmc-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 0.2rem;
+    }
+    .hmc-value {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-body {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      align-items: end;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title-col {
+      padding: 3rem 1.5rem 3rem 2.5rem;
+      border-right: 1px solid var(--ink);
+    }
+
+    .sys-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .sys-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    h1 {
+      font-family: var(--macro);
+      font-size: clamp(4.5rem, 10vw, 12rem);
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    h1 .l1 { display: block; color: var(--ink); }
+    h1 .l2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 3px var(--ink);
+    }
+    h1 .l3 { display: block; color: var(--red); }
+    h1 .l4 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 3px var(--ink);
+    }
+
+    .hero-right-col {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      opacity: 0.65;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .htag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--ink);
+      margin-right: -1px;
+      margin-bottom: -1px;
+    }
+    .htag.red { background: var(--red); color: #fff; border-color: var(--red); }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--ink);
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--red); border-color: var(--red); }
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: transparent;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem;
+      border: 1px solid rgba(5,5,5,0.25);
+      border-top: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--ink); background: rgba(5,5,5,0.05); }
+
+    .hero-footer-strip {
+      border-top: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+    .ticker-wrap {
+      overflow: hidden;
+      border-right: 1px solid var(--ink);
+    }
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+    .ticker-item {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      padding: 0.85rem 1.5rem;
+      border-right: 1px solid rgba(5,5,5,0.12);
+    }
+    .ticker-item.accent { color: var(--red); opacity: 1; border-right-color: rgba(230,25,25,0.2); }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .hero-rev {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.25;
+      padding: 0 1.5rem;
+      white-space: nowrap;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .section-header {
+      border-bottom: 1px solid var(--ink);
+      display: grid;
+      grid-template-columns: 280px 1fr auto;
+      align-items: center;
+    }
+    .sh-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.5rem;
+      border-right: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sh-label::before {
+      content: '[ ';
+      color: var(--red);
+    }
+    .sh-label::after {
+      content: ' ]';
+      color: var(--red);
+    }
+    .sh-title {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      padding: 0.85rem 1.5rem;
+    }
+    .sh-ref {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.2;
+      padding: 0.85rem 1.5rem;
+      border-left: 1px solid var(--ink);
+    }
+
+    .section-inner {
+      padding: 4rem 2.5rem;
+    }
+
+    h2 {
+      font-family: var(--macro);
+      font-size: clamp(2.8rem, 5.5vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    h2 .red { color: var(--red); }
+    h2 .outline {
+      color: transparent;
+      -webkit-text-stroke: 2.5px var(--ink);
+    }
+
+    /* ── PARA QUIÉN ── */
+    .para-quien-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .pq-left {
+      border-right: 1px solid var(--ink);
+      padding: 4rem 2.5rem;
+    }
+    .pq-left h2 { margin-bottom: 2rem; }
+    .pq-left p {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      opacity: 0.6;
+      max-width: 480px;
+      margin-bottom: 1rem;
+    }
+
+    .pq-right {
+      padding: 0;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--ink);
+      transition: background 0.15s;
+    }
+    .profile-row:last-child { border-bottom: none; }
+    .profile-row:hover { background: rgba(5,5,5,0.04); }
+
+    .pr-num {
+      font-family: var(--macro);
+      font-size: 1.1rem;
+      color: var(--red);
+      border-right: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0;
+    }
+    .pr-content { padding: 1.5rem; }
+    .pr-title {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .pr-sub {
+      font-size: 0.75rem;
+      line-height: 1.6;
+      opacity: 0.45;
+    }
+
+    /* ── FASES ── */
+    .fases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--ink);
+    }
+    .fase-card {
+      background: var(--bg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .fase-card:hover { background: #EEEDE8; }
+
+    .fase-num {
+      font-family: var(--macro);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.07;
+      position: absolute;
+      right: 1.5rem;
+      top: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .fase-tool {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .fase-title {
+      font-family: var(--macro);
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 0.85rem;
+    }
+    .fase-desc {
+      font-size: 0.78rem;
+      line-height: 1.7;
+      opacity: 0.5;
+      margin-bottom: 1.25rem;
+    }
+    .fase-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid rgba(5,5,5,0.2);
+      margin-right: -1px;
+      margin-bottom: -1px;
+      opacity: 0.6;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .get-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .get-left {
+      border-right: 1px solid var(--ink);
+      padding: 4rem 2.5rem;
+    }
+    .get-left h2 { margin-bottom: 2rem; }
+    .get-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2rem;
+    }
+    .get-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(5,5,5,0.1);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+    .get-list li:last-child { border-bottom: none; }
+    .get-marker {
+      font-family: var(--macro);
+      font-size: 0.75rem;
+      color: var(--red);
+      padding-top: 0.1rem;
+    }
+
+    .get-right {
+      padding: 4rem 2.5rem;
+    }
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(5,5,5,0.08);
+    }
+    .flow-step:last-child { border-bottom: none; }
+    .fst-num {
+      font-family: var(--macro);
+      font-size: 0.75rem;
+      color: var(--red);
+      padding-top: 0.1rem;
+    }
+    .fst-content strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+    .fst-content p {
+      font-size: 0.72rem;
+      line-height: 1.6;
+      opacity: 0.45;
+    }
+
+    /* ── PREP ── */
+    .prep-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .prep-left {
+      border-right: 1px solid var(--ink);
+      padding: 4rem 2.5rem;
+    }
+    .prep-left h2 { margin-bottom: 2rem; }
+    .prep-left > p {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      opacity: 0.6;
+      margin-top: 1.5rem;
+      max-width: 420px;
+    }
+    .prep-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .prep-list li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(5,5,5,0.08);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+    .prep-list li:last-child { border-bottom: none; }
+    .prep-check { color: var(--red); font-weight: 700; }
+
+    .prep-right { padding: 4rem 2.5rem; }
+    .llm-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1rem;
+    }
+    .llm-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--ink);
+    }
+    .llm-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--ink);
+      transition: background 0.15s;
+    }
+    .llm-row:last-child { border-bottom: none; }
+    .llm-row:hover { background: rgba(5,5,5,0.04); }
+    .llm-name {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.15rem;
+    }
+    .llm-sub { font-size: 0.68rem; opacity: 0.4; }
+    .llm-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--ink);
+    }
+    .llm-tag.recommended {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+    .llm-note {
+      font-size: 0.7rem;
+      line-height: 1.6;
+      opacity: 0.4;
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border: 1px solid rgba(5,5,5,0.15);
+      border-top: 2px solid var(--red);
+    }
+
+    /* ── AGENDA ── */
+    .agenda-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+    }
+    .agenda-sidebar {
+      border-right: 1px solid var(--ink);
+      padding: 4rem 2rem;
+    }
+    .agenda-sidebar h2 { margin-bottom: 2rem; }
+    .a-stat { margin-bottom: 1.5rem; }
+    .a-stat-num {
+      font-family: var(--macro);
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--red);
+    }
+    .a-stat-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+
+    .agenda-table {
+      padding: 0;
+    }
+    .agenda-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 100px;
+      border-bottom: 1px solid var(--ink);
+      transition: background 0.15s;
+    }
+    .agenda-row:last-child { border-bottom: none; }
+    .agenda-row:hover { background: rgba(5,5,5,0.03); }
+    .a-time {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      opacity: 0.35;
+      padding: 1.25rem;
+      border-right: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+    }
+    .a-main { padding: 1.25rem; border-right: 1px solid var(--ink); }
+    .a-name {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .a-sub { font-size: 0.7rem; opacity: 0.4; }
+    .a-type {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .at-hands { color: var(--ink); background: rgba(5,5,5,0.06); }
+    .at-theory { color: var(--red); }
+    .at-break { opacity: 0.25; }
+    .at-wrap { background: var(--red); color: #fff; }
+
+    /* ── SOBRE ── */
+    .sobre-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .sobre-left {
+      border-right: 1px solid var(--ink);
+      padding: 4rem 2.5rem;
+    }
+    .sobre-left h2 { margin-bottom: 1.5rem; }
+    .sobre-left > p {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+    .award-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 2rem;
+    }
+    .award-tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(5,5,5,0.2);
+      margin-right: -1px;
+      margin-bottom: -1px;
+    }
+
+    .sobre-right { padding: 0; }
+    .sobre-card-header {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--ink);
+    }
+    .sobre-name {
+      font-family: var(--macro);
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .sobre-role {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      opacity: 0.35;
+      line-height: 1.5;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--ink);
+    }
+    .stat-cell {
+      background: var(--bg);
+      padding: 1.5rem 2.5rem;
+    }
+    .stat-cell:hover { background: #EEEDE8; }
+    .stat-num {
+      font-family: var(--macro);
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--red);
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.35;
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--ink);
+      color: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: none;
+    }
+    .cta-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--macro);
+      font-size: clamp(12rem, 28vw, 42rem);
+      white-space: nowrap;
+      opacity: 0.04;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+      color: var(--bg);
+      text-transform: uppercase;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 2.5rem;
+    }
+    .cta-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .cta-eyebrow::before, .cta-eyebrow::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--red);
+    }
+    .cta-title {
+      font-family: var(--macro);
+      font-size: clamp(3.5rem, 7vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+    }
+    .cta-desc {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      opacity: 0.5;
+      max-width: 440px;
+      margin: 0 auto 3rem;
+    }
+    .btn-cta {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--bg);
+      text-decoration: none;
+      padding: 1.1rem 2.5rem;
+      border: 2px solid var(--bg);
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn-cta:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .cta-note {
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.2;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: stretch;
+      border-top: 2px solid rgba(244,244,240,0.1);
+    }
+    .footer-logo {
+      font-family: var(--macro);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      color: rgba(244,244,240,0.35);
+      padding: 1.25rem 2rem;
+      border-right: 1px solid rgba(244,244,240,0.08);
+      text-transform: uppercase;
+    }
+    .footer-by {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.2;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+    }
+    .footer-by a { color: var(--red); text-decoration: none; opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { height: auto; }
+      .nav-left { display: none; }
+      .hero-meta-strip { grid-template-columns: 1fr 1fr; }
+      .hero-body { grid-template-columns: 1fr; }
+      .hero-title-col { border-right: none; border-bottom: 1px solid var(--ink); }
+      .para-quien-grid, .get-grid, .prep-grid, .sobre-layout { grid-template-columns: 1fr; }
+      .pq-left, .get-left, .prep-left, .sobre-left { border-right: none; border-bottom: 1px solid var(--ink); }
+      .fases-grid { grid-template-columns: 1fr; }
+      .agenda-layout { grid-template-columns: 1fr; }
+      .agenda-sidebar { border-right: none; border-bottom: 1px solid var(--ink); }
+      .agenda-row { grid-template-columns: 90px 1fr; }
+      .a-type { display: none; }
+      .section-header { grid-template-columns: 1fr auto; }
+      .sh-title { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">Vibe &amp; Bloom</a>
+    <span class="nav-ref">SYS-01 // REV 2.6</span>
+  </div>
+  <div class="nav-links">
+    <a href="#fases" class="nav-link">[ Programa ]</a>
+    <a href="#agenda" class="nav-link">[ Agenda ]</a>
+    <a href="#sobre" class="nav-link">[ Quién ]</a>
+    <a href="#inscripcion" class="nav-cta">&gt;&gt;&gt; Reservar plaza</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-bottom:none;">
+  <div class="hero-bg-num" aria-hidden="true">V&amp;B</div>
+
+  <div class="hero-meta-strip">
+    <div class="hero-meta-cell">
+      <div class="hmc-label">Duración</div>
+      <div class="hmc-value">3 H 00 MIN</div>
+    </div>
+    <div class="hero-meta-cell">
+      <div class="hmc-label">Formato</div>
+      <div class="hmc-value">Presencial · BCN</div>
+    </div>
+    <div class="hero-meta-cell">
+      <div class="hmc-label">Nivel</div>
+      <div class="hmc-value">Todos los perfiles</div>
+    </div>
+    <div class="hero-meta-cell">
+      <div class="hmc-label">Plazas</div>
+      <div class="hmc-value" style="color:var(--red)">Limitadas ///</div>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-title-col">
+      <div class="sys-tag">Taller presencial de flujos de IA para creativos</div>
+      <h1>
+        <span class="l1">IA para</span>
+        <span class="l2">Creativos</span>
+        <span class="l3">Sin miedo,</span>
+        <span class="l4">con flujo</span>
+      </h1>
+    </div>
+
+    <div class="hero-right-col">
+      <p class="hero-desc">Cuatro fases del proceso creativo. Una herramienta protagonista en cada una. Tú construyes tu propio flujo el mismo día — con tu marca real, desde el primer prompt.</p>
+
+      <div class="hero-tags">
+        <span class="htag">Midjourney</span>
+        <span class="htag red">Freepik · Flux</span>
+        <span class="htag">Tu LLM</span>
+        <span class="htag">Mockups</span>
+        <span class="htag">100% Hands-on</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#inscripcion" class="btn-primary">Quiero mi plaza <span>&gt;&gt;&gt;</span></a>
+        <a href="#fases" class="btn-ghost">Ver el programa <span>↓</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-footer-strip">
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span class="ticker-item accent">Midjourney</span>
+        <span class="ticker-item">Flujo de imágenes</span>
+        <span class="ticker-item accent">Tu cerebro de marca</span>
+        <span class="ticker-item">Freepik · Flux</span>
+        <span class="ticker-item accent">Mockups en contexto</span>
+        <span class="ticker-item">Prompts que funcionan</span>
+        <span class="ticker-item accent">Hands-on</span>
+        <span class="ticker-item">Barcelona</span>
+        <span class="ticker-item accent">Sin código</span>
+        <span class="ticker-item">Campaña completa</span>
+        <span class="ticker-item accent">Midjourney</span>
+        <span class="ticker-item">Flujo de imágenes</span>
+        <span class="ticker-item accent">Tu cerebro de marca</span>
+        <span class="ticker-item">Freepik · Flux</span>
+        <span class="ticker-item accent">Mockups en contexto</span>
+        <span class="ticker-item">Prompts que funcionan</span>
+        <span class="ticker-item accent">Hands-on</span>
+        <span class="ticker-item">Barcelona</span>
+        <span class="ticker-item accent">Sin código</span>
+        <span class="ticker-item">Campaña completa</span>
+      </div>
+    </div>
+    <div class="hero-rev">UNIT / D-01 · BCN · © 2026</div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section id="para-quien">
+  <div class="section-header">
+    <span class="sh-label">Para quién es</span>
+    <span class="sh-title">/// PERFIL DE ASISTENTE ///</span>
+    <span class="sh-ref">REF-02</span>
+  </div>
+  <div class="para-quien-grid">
+    <div class="pq-left">
+      <h2>Si creas,<br>esto es<br>para <span class="red">ti</span></h2>
+      <p>No necesitas saber programar ni ser "de tecnología". Necesitas un proyecto creativo y querer trabajar más rápido, más bien, con más control.</p>
+      <p>Trabajarás con tu propia marca o proyecto desde el primer prompt — no con ejemplos genéricos que luego tienes que adaptar.</p>
+    </div>
+    <div class="pq-right">
+      <div class="profile-row">
+        <div class="pr-num">01</div>
+        <div class="pr-content">
+          <div class="pr-title">Diseñador · Art Director</div>
+          <div class="pr-sub">Tienes clientes y proyectos. Quieres que la IA trabaje dentro de tu sistema, no al margen de él.</div>
+        </div>
+      </div>
+      <div class="profile-row">
+        <div class="pr-num">02</div>
+        <div class="pr-content">
+          <div class="pr-title">Freelance creativo</div>
+          <div class="pr-sub">Gestionas marcas de terceros. Flujos que funcionen para diferentes identidades sin empezar de cero.</div>
+        </div>
+      </div>
+      <div class="profile-row">
+        <div class="pr-num">03</div>
+        <div class="pr-content">
+          <div class="pr-title">Creativo construyendo su marca</div>
+          <div class="pr-sub">Tu marca eres tú. Un sistema que te conozca y genere desde tu voz, no desde una plantilla.</div>
+        </div>
+      </div>
+      <div class="profile-row">
+        <div class="pr-num">04</div>
+        <div class="pr-content">
+          <div class="pr-title">Cualquiera que ya usa IA</div>
+          <div class="pr-sub">Usas herramientas pero sientes que no tienes un sistema. Este taller es ese sistema.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASES -->
+<section id="fases">
+  <div class="section-header">
+    <span class="sh-label">El programa</span>
+    <span class="sh-title">/// 4 FASES · 1 FLUJO COMPLETO ///</span>
+    <span class="sh-ref">REF-03</span>
+  </div>
+  <div class="fases-grid">
+    <div class="fase-card">
+      <div class="fase-num">01</div>
+      <span class="fase-tool">[ Midjourney ]</span>
+      <h3 class="fase-title">Concepto e inspiración</h3>
+      <p class="fase-desc">De brief a referencias visuales concretas. Moodboard de concepto en minutos. Tú trabajas con tu marca desde el primer prompt — saber qué pedir y por qué.</p>
+      <div class="fase-chips">
+        <span class="chip">Prompt base</span>
+        <span class="chip">Iteración de mood</span>
+        <span class="chip">Moodboard</span>
+      </div>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">02</div>
+      <span class="fase-tool">[ Freepik / Flux ]</span>
+      <h3 class="fase-title">Sistema de imágenes y campaña</h3>
+      <p class="fase-desc">Concepto → sistema visual coherente para campañas. Imagen de referencia, estilo consistente, assets para todos los formatos. Mockups integrados. Video como extensión.</p>
+      <div class="fase-chips">
+        <span class="chip">Imagen de referencia</span>
+        <span class="chip">Assets en lote</span>
+        <span class="chip">Mockups</span>
+        <span class="chip">Video · extra</span>
+      </div>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">03</div>
+      <span class="fase-tool">[ Claude · ChatGPT · Gemini ]</span>
+      <h3 class="fase-title">Tu cerebro de marca</h3>
+      <p class="fase-desc">Proyecto en tu LLM de confianza que conoce el ADN de cada marca. No un archivo muerto — un colaborador que genera prompts adaptados cada vez que lo necesitas.</p>
+      <div class="fase-chips">
+        <span class="chip">Projects / custom context</span>
+        <span class="chip">Prompts en contexto</span>
+        <span class="chip">Reutilizable</span>
+      </div>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">04</div>
+      <span class="fase-tool">[ Cierre ]</span>
+      <h3 class="fase-title">Tu flujo + Q&amp;A</h3>
+      <p class="fase-desc">Recapitulación del flujo completo. Qué herramienta para qué momento del proceso creativo. Preguntas abiertas y próximos pasos concretos para cada asistente.</p>
+      <div class="fase-chips">
+        <span class="chip">Recap visual</span>
+        <span class="chip">Q&amp;A abierto</span>
+        <span class="chip">Próximos pasos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section>
+  <div class="section-header">
+    <span class="sh-label">Lo que te llevas</span>
+    <span class="sh-title">/// OUTPUT / DELIVERABLES ///</span>
+    <span class="sh-ref">REF-04</span>
+  </div>
+  <div class="get-grid">
+    <div class="get-left">
+      <h2>Sales con<br>algo <span class="red">hecho.</span><br><span class="outline">Siempre.</span></h2>
+      <ul class="get-list">
+        <li><span class="get-marker">&gt;&gt;&gt;</span> Un moodboard de concepto real de tu marca</li>
+        <li><span class="get-marker">&gt;&gt;&gt;</span> Un sistema visual de campaña coherente</li>
+        <li><span class="get-marker">&gt;&gt;&gt;</span> Tu cerebro de marca configurado en tu LLM</li>
+        <li><span class="get-marker">&gt;&gt;&gt;</span> Un flujo que puedes repetir desde mañana</li>
+      </ul>
+    </div>
+    <div class="get-right">
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="fst-num">01</div>
+          <div class="fst-content">
+            <strong>Brief → Moodboard de concepto</strong>
+            <p>Prompt base en Midjourney. 20 referencias en 5 minutos. Selección y moodboard exportable.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fst-num">02</div>
+          <div class="fst-content">
+            <strong>Moodboard → Sistema visual de campaña</strong>
+            <p>Imagen de referencia en Freepik. Plantilla de prompt reutilizable. Assets con consistencia real.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fst-num">↳</div>
+          <div class="fst-content">
+            <strong>Assets → Mockups en contexto</strong>
+            <p>Integración directa en el flujo. Video como extensión opcional.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fst-num">03</div>
+          <div class="fst-content">
+            <strong>Tu cerebro de marca activo</strong>
+            <p>Proyecto en tu LLM con ADN de marca. Genera prompts en contexto. Reutilizable por cliente.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="fst-num">04</div>
+          <div class="fst-content">
+            <strong>Tu flujo completo documentado</strong>
+            <p>Un sistema que puedes repetir desde mañana. No una idea — un proceso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREP -->
+<section id="preparacion">
+  <div class="section-header">
+    <span class="sh-label">Antes de venir</span>
+    <span class="sh-title">/// PRE-FLIGHT CHECKLIST ///</span>
+    <span class="sh-ref">REF-05</span>
+  </div>
+  <div class="prep-grid">
+    <div class="prep-left">
+      <h2>Llega <span class="red">lista.</span><br><span class="outline">Sin perder</span><br>ni un minuto.</h2>
+      <p>Para que el taller sea 100% hands-on desde el primer minuto, llega con esta información preparada. No tiene que ser perfecta — solo tiene que existir.</p>
+      <ul class="prep-list">
+        <li><span class="prep-check">[✓]</span> La marca con la que vas a trabajar (cliente real o proyecto propio)</li>
+        <li><span class="prep-check">[✓]</span> 3–5 palabras que describen su estilo visual</li>
+        <li><span class="prep-check">[✓]</span> 2–3 referencias de imagen que te gusten</li>
+        <li><span class="prep-check">[✓]</span> Colores y tipografías si los tienes (opcional)</li>
+        <li><span class="prep-check">[✓]</span> Una frase de posicionamiento provisional</li>
+        <li><span class="prep-check">[✓]</span> Tu LLM favorito abierto y con cuenta activa</li>
+      </ul>
+    </div>
+    <div class="prep-right">
+      <div class="llm-label">[ Tu LLM, el que tú elijas ]</div>
+      <div class="llm-stack">
+        <div class="llm-row">
+          <div>
+            <div class="llm-name">Claude</div>
+            <div class="llm-sub">Projects con contexto persistente · claude.ai</div>
+          </div>
+          <span class="llm-tag recommended">Recomendado</span>
+        </div>
+        <div class="llm-row">
+          <div>
+            <div class="llm-name">ChatGPT</div>
+            <div class="llm-sub">Custom instructions + Projects · openai.com</div>
+          </div>
+          <span class="llm-tag">Funciona</span>
+        </div>
+        <div class="llm-row">
+          <div>
+            <div class="llm-name">Gemini</div>
+            <div class="llm-sub">Gems / contexto personalizado · gemini.google.com</div>
+          </div>
+          <span class="llm-tag">Funciona</span>
+        </div>
+      </div>
+      <p class="llm-note">Si no tienes cuenta en ninguno, te ayudamos a configurar una gratuita antes del taller. Lo que importa es que traigas tu marca preparada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div class="section-header">
+    <span class="sh-label">Agenda</span>
+    <span class="sh-title">/// 3H · SECUENCIA OPERATIVA ///</span>
+    <span class="sh-ref">REF-06</span>
+  </div>
+  <div class="agenda-layout">
+    <div class="agenda-sidebar">
+      <h2>3 horas<br>de <span class="red">flujo</span></h2>
+      <div class="a-stat">
+        <div class="a-stat-num">3h</div>
+        <div class="a-stat-label">de taller</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-stat-num">100%</div>
+        <div class="a-stat-label">hands-on</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-stat-num">0</div>
+        <div class="a-stat-label">aburrimiento garantizado</div>
+      </div>
+    </div>
+    <div class="agenda-table">
+      <div class="agenda-row">
+        <div class="a-time">0:00 – 0:15</div>
+        <div class="a-main">
+          <div class="a-name">Intro: el flujo completo</div>
+          <div class="a-sub">Por qué estas herramientas, en este orden</div>
+        </div>
+        <div class="a-type at-theory">Teoría</div>
+      </div>
+      <div class="agenda-row">
+        <div class="a-time">0:15 – 1:00</div>
+        <div class="a-main">
+          <div class="a-name">Fase 01 — Concepto en Midjourney</div>
+          <div class="a-sub">Brief → moodboard en vivo con tu marca</div>
+        </div>
+        <div class="a-type at-hands">Práctica</div>
+      </div>
+      <div class="agenda-row">
+        <div class="a-time">1:00 – 1:45</div>
+        <div class="a-main">
+          <div class="a-name">Fase 02 — Sistema de campaña + Mockups</div>
+          <div class="a-sub">Freepik · Flux · assets coherentes · mockups · video</div>
+        </div>
+        <div class="a-type at-hands">Práctica</div>
+      </div>
+      <div class="agenda-row">
+        <div class="a-time">1:45 – 2:00</div>
+        <div class="a-main">
+          <div class="a-name">Break</div>
+          <div class="a-sub">—</div>
+        </div>
+        <div class="a-type at-break">Pausa</div>
+      </div>
+      <div class="agenda-row">
+        <div class="a-time">2:00 – 2:45</div>
+        <div class="a-main">
+          <div class="a-name">Fase 03 — Tu cerebro de marca</div>
+          <div class="a-sub">Configura tu proyecto en Claude / ChatGPT / Gemini</div>
+        </div>
+        <div class="a-type at-hands">Práctica</div>
+      </div>
+      <div class="agenda-row">
+        <div class="a-time">2:45 – 3:00</div>
+        <div class="a-main">
+          <div class="a-name">Cierre + Q&amp;A</div>
+          <div class="a-sub">Tu flujo, tus próximos pasos personalizados</div>
+        </div>
+        <div class="a-type at-wrap">Cierre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header">
+    <span class="sh-label">Quién lo da</span>
+    <span class="sh-title">/// INSTRUCTOR DATA ///</span>
+    <span class="sh-ref">REF-07</span>
+  </div>
+  <div class="sobre-layout">
+    <div class="sobre-left">
+      <h2>Laura<br>Rosa<br><span class="red">Díaz</span><br>Cañas</h2>
+      <p>Brand strategist y directora creativa con 15 años de experiencia internacional. Trabajo en la intersección de estrategia de marca, dirección creativa y flujos de trabajo con IA.</p>
+      <p>He construido mis propias herramientas con IA — BARE, Banana Lab, Rose Runner — no para hablar de ello, sino porque necesitaba soluciones que no existían. Eso es exactamente lo que enseño.</p>
+      <p>Fundadora de Rose Days Brand Lab. Brand &amp; Digital Manager en EDUCA EDTECH Group. Máster en Product Management con IA, Nuclio Digital School 2026.</p>
+      <div class="award-tags">
+        <span class="award-tag">AIMA 2026</span>
+        <span class="award-tag">House of Prompt Award</span>
+        <span class="award-tag">España · Colombia · Serbia · Suecia</span>
+        <span class="award-tag">Fermat.app Ambassador</span>
+        <span class="award-tag">Flora Fauna AI Ambassador</span>
+      </div>
+    </div>
+    <div class="sobre-right">
+      <div class="sobre-card-header">
+        <div class="sobre-name">Laura Rosa<br>Díaz Cañas</div>
+        <div class="sobre-role">Brand Strategist · Creative Director<br>Rose Days Brand Lab · EDUCA EDTECH Group</div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-num">15</div>
+          <div class="stat-label">años exp. internacional</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">4</div>
+          <div class="stat-label">países trabajados</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">herramientas propias con IA</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">premios IA creativa 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="inscripcion">
+  <div class="cta-bg-text" aria-hidden="true">BLOOM</div>
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Taller presencial · Barcelona · Plazas limitadas</div>
+    <h2 class="cta-title">¿Nos vemos<br>en el taller?</h2>
+    <p class="cta-desc">Plazas limitadas para garantizar atención real a cada proyecto. Si tienes una marca o proyecto creativo, este es tu lugar.</p>
+    <a href="mailto:laura.diazca@gmail.com?subject=Quiero%20una%20plaza%20en%20Vibe%20%26%20Bloom" class="btn-cta">
+      &gt;&gt;&gt; Reservar mi plaza
+    </a>
+    <div class="cta-note">rosedays.myportfolio.com · linkedin.com/in/rosedays</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Vibe &amp; Bloom // SYS-01</div>
+  <div class="footer-by">
+    por <a href="https://linkedin.com/in/rosedays" target="_blank">Laura Rosa Díaz Cañas</a> · Rose Days Brand Lab
+  </div>
+</footer>
+
+<script>
+  // Scroll-aware nav
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+</script>
+</body>
+</html>
