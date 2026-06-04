@@ -1,59 +1,39 @@
 const MODULES = [
   {
     num: '01',
-    title: '¿Qué es vibecoding y qué puedes crear?',
-    desc: 'Ves ejemplos reales para creativas y agencias. Defines lo que vas a construir hoy.',
-    tags: ['Conceptos', 'Ejemplos reales', 'Define tu tool'],
-    duration: '25 min',
+    title: 'Concepto en Midjourney',
+    desc: 'Cómo usar la herramienta y los estilos que propone para crear imágenes de campaña, de referencia y moodboards.',
+    tags: ['Midjourney', 'Estilos', 'Moodboard', 'Imágenes de campaña'],
+    duration: '45 min',
     isBreak: false,
+    isExtra: false,
   },
   {
     num: '02',
-    title: 'El ecosistema: Claude, GitHub, Vercel, Firebase/Supabase',
-    desc: 'Para qué sirve cada herramienta y cómo se conectan entre sí.',
-    tags: ['Claude', 'GitHub', 'Vercel', 'Supabase'],
-    duration: '20 min',
-    isBreak: false,
-  },
-  {
-    num: '03',
-    title: 'Manos a la obra — construimos juntas',
-    desc: 'Sigues mi pantalla. Construyes tu tool paso a paso y aprendes a iterar.',
-    tags: ['Prompting', 'Build en vivo', 'Iteración'],
+    title: 'Flujos creativos coherentes con la marca',
+    desc: 'En qué consisten los flujos creativos, qué tipos de herramientas podemos usar y espacio para crear tu propio flujo.',
+    tags: ['Flujos creativos', 'Brand', 'Magnific', 'Flora', 'Pletor'],
     duration: '60 min',
     isBreak: false,
+    isExtra: false,
   },
   {
-    num: '🍕',
-    title: 'Break — comer, conversar, respirar',
-    desc: '20 minutos para recargar. El cerebro necesita pausa.',
-    tags: [],
-    duration: '20 min',
-    isBreak: true,
+    num: '★',
+    title: 'Extra: Cómo hacer mockups',
+    desc: 'Técnicas para crear mockups de producto y campaña con IA. De la imagen al contexto de marca.',
+    tags: ['Mockups', 'Producto', 'IA'],
+    duration: '30 min',
+    isBreak: false,
+    isExtra: true,
   },
   {
     num: '04',
-    title: 'GitHub + Vercel — tu tool en internet',
-    desc: 'Al final tienes un link real que puedes mandar por WhatsApp ahora mismo.',
-    tags: ['GitHub', 'Deploy', 'Link real'],
-    duration: '40 min',
-    isBreak: false,
-  },
-  {
-    num: '05',
-    title: 'Otras Tools que te hacen la vida más fácil',
-    desc: 'Conoce plataformas como Lovable, Replit, entre otras.',
-    tags: ['Tools', 'Sin tecnicismos', 'En vivo'],
-    duration: '30 min',
-    isBreak: false,
-  },
-  {
-    num: '06',
-    title: 'Cómo no gastar de más',
-    desc: 'Tokens, modelos, free tiers. Sin sorpresas en la tarjeta.',
-    tags: ['Tokens', 'Free tiers', 'Tips'],
+    title: 'Cierre + Q&A',
+    desc: 'Resumen del workshop, recursos para seguir explorando y espacio para todas tus preguntas.',
+    tags: [],
     duration: '15 min',
     isBreak: false,
+    isExtra: false,
   },
 ]
 
@@ -74,19 +54,19 @@ export default function Curriculum() {
           <div
             key={i}
             className={`flex items-start gap-3 sm:gap-6 px-4 sm:px-8 py-6 border-b border-[rgba(255,255,255,0.06)] last:border-b-0 ${
-              mod.isBreak ? 'bg-[rgba(216,243,130,0.04)]' : ''
+              mod.isBreak ? 'bg-[rgba(216,243,130,0.04)]' : mod.isExtra ? 'bg-[rgba(130,109,238,0.06)]' : ''
             }`}
           >
             {/* Number */}
             <div className="w-14 shrink-0">
-              <span className={`font-bebas ${mod.isBreak ? 'text-2xl' : 'text-[35px]'} leading-[1] text-purple`}>
+              <span className={`font-bebas ${mod.isBreak ? 'text-2xl' : 'text-[35px]'} leading-[1] ${mod.isExtra ? 'text-lime' : 'text-purple'}`}>
                 {mod.num}
               </span>
             </div>
 
             {/* Content */}
             <div className="flex-1">
-              <p className={`font-dm font-medium text-[14.7px] mb-1.5 ${mod.isBreak ? 'text-lime' : 'text-white'}`}>
+              <p className={`font-dm font-medium text-[14.7px] mb-1.5 ${mod.isBreak ? 'text-lime' : mod.isExtra ? 'text-lime' : 'text-white'}`}>
                 {mod.title}
               </p>
               <p className="font-dm font-light text-[rgba(255,255,255,0.4)] text-[12.5px] leading-[20px] mb-2">
@@ -109,7 +89,7 @@ export default function Curriculum() {
             {/* Duration */}
             <div className="shrink-0 text-right">
               <span className={`font-dm font-medium text-[10.9px] tracking-[0.87px] uppercase ${
-                mod.isBreak ? 'text-[rgba(216,243,130,0.4)]' : 'text-[rgba(255,255,255,0.25)]'
+                mod.isBreak ? 'text-[rgba(216,243,130,0.4)]' : mod.isExtra ? 'text-[rgba(216,243,130,0.6)]' : 'text-[rgba(255,255,255,0.5)]'
               }`}>
                 {mod.duration}
               </span>

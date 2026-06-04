@@ -112,7 +112,7 @@ export default function SobreMi() {
                   <span className={`font-bebas text-[18px] tracking-[0.5px] ${b.text}`}>
                     {b.name}
                   </span>
-                  <span className={`font-dm font-medium text-[10.4px] tracking-[0.8px] uppercase opacity-70 ${b.text}`}>
+                  <span className={`font-dm font-medium text-[10.4px] tracking-[0.8px] uppercase ${b.text}`}>
                     {b.role}
                   </span>
                 </div>

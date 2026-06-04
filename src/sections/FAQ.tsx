@@ -1,11 +1,18 @@
-const FAQS = [
+const FAQS: { q: string; a?: string; items?: string[] }[] = [
   {
     q: '¿Necesito saber programar?',
     a: 'Para nada. La IA escribe el código. Tú decides qué construir y cómo debe funcionar.',
   },
   {
     q: '¿Qué necesito para el taller?',
-    a: 'Computadora con internet y ganas de construir. Las cuentas que usamos son todas gratuitas — te explicamos cómo crearlas en el mismo taller.',
+    items: [
+      'La marca con la que vas a trabajar (cliente real o proyecto propio)',
+      '3–5 palabras que describen su estilo visual',
+      '2–3 referencias de imagen que te gusten',
+      'Colores y tipografías si los tienes (opcional)',
+      'Tu LLM favorito abierto y con cuenta activa',
+      'Cuenta de Midjourney activa — puede ser con el basic plan que cuesta 10 USD',
+    ],
   },
   {
     q: '¿Voy a terminar con algo funcional ese mismo día?',
@@ -56,9 +63,20 @@ export default function FAQ() {
               <h3 className="font-bebas text-dark text-[19.2px] tracking-[0.58px] mb-2">
                 {item.q}
               </h3>
-              <p className="font-dm font-light text-[#8a8a8a] text-[13px] leading-[22.3px]">
-                {item.a}
-              </p>
+              {item.items ? (
+                <ul className="space-y-2">
+                  {item.items.map((req) => (
+                    <li key={req} className="flex items-start gap-2">
+                      <span className="mt-[7px] size-[4px] bg-purple rounded-full shrink-0" />
+                      <span className="font-dm font-light text-[#8a8a8a] text-[13px] leading-[22.3px]">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="font-dm font-light text-[#8a8a8a] text-[13px] leading-[22.3px]">
+                  {item.a}
+                </p>
+              )}
             </div>
           ))}
         </div>

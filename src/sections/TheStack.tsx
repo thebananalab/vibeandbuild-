@@ -1,39 +1,43 @@
 const STACK = [
   {
-    icon: '/assets/claude-color.svg',
-    iconBg: 'bg-[rgba(235,66,19,0.1)]',
-    name: 'CLAUDE',
-    badge: 'CONSTRUYES AQUÍ',
-    badgeBg: 'bg-[rgba(235,66,19,0.1)]',
-    badgeColor: 'text-purple',
-    body: 'Le hablas en español. Construye el código. Tu punto de entrada para todo.',
-  },
-  {
-    icon: '/assets/github.svg',
-    iconBg: 'bg-[rgba(28,28,28,0.06)]',
-    name: 'GITHUB',
-    badge: 'GUARDAS AQUÍ',
-    badgeBg: 'bg-[rgba(28,28,28,0.06)]',
-    badgeColor: 'text-dark',
-    body: 'Como Google Drive para tu código. Guarda versiones, nunca pierdes nada. Gratis.',
-  },
-  {
-    icon: '/assets/vercel.svg',
-    iconBg: 'bg-[rgba(130,109,238,0.12)]',
-    name: 'VERCEL',
-    badge: 'PUBLICAS AQUÍ',
+    initial: 'MJ',
+    iconBg: 'bg-[rgba(130,109,238,0.15)]',
+    initialColor: 'text-purple',
+    name: 'MIDJOURNEY',
+    badge: 'GENERAS AQUÍ',
     badgeBg: 'bg-[rgba(130,109,238,0.12)]',
     badgeColor: 'text-purple',
-    body: 'Link real en 2 min. Sin servidores. Sin configurar nada. Gratis.',
+    body: 'Le das texto, devuelve imágenes. El núcleo del workshop. Genera campaña, moodboard y referencia.',
   },
   {
-    icon: '/assets/Primary_Vertical_Lockup_Full_Color_Inverted.svg',
+    initial: 'MA',
+    iconBg: 'bg-[rgba(235,66,19,0.1)]',
+    initialColor: 'text-[#eb4213]',
+    name: 'MAGNIFIC',
+    badge: 'ANTES FREEPIK',
+    badgeBg: 'bg-[rgba(235,66,19,0.08)]',
+    badgeColor: 'text-[#eb4213]',
+    body: 'Upscale e intensifica tus imágenes. Más detalle, más textura, más editorial.',
+  },
+  {
+    initial: 'FL',
     iconBg: 'bg-[rgba(216,243,130,0.4)]',
-    name: 'FIREBASE/SUPABASE',
-    badge: 'GUARDAS DATOS',
+    initialColor: 'text-[#5a7a00]',
+    name: 'FLORA',
+    badge: 'FLUJOS AQUÍ',
     badgeBg: 'bg-[rgba(216,243,130,0.4)]',
     badgeColor: 'text-[#5a7a00]',
-    body: 'Para que tu tool recuerde todo. Sin esto, olvida al cerrar la pestaña.',
+    body: 'Crea pipelines de imagen con IA. Tu flujo visual coherente y automatizado.',
+  },
+  {
+    initial: 'PL',
+    iconBg: 'bg-[rgba(255,153,220,0.25)]',
+    initialColor: 'text-pink',
+    name: 'PLETOR',
+    badge: 'MOCKUPS AQUÍ',
+    badgeBg: 'bg-[rgba(255,153,220,0.2)]',
+    badgeColor: 'text-[#c0068a]',
+    body: 'Mockups de producto con IA. De la imagen al contexto de marca en segundos.',
   },
 ]
 
@@ -53,7 +57,7 @@ export default function TheStack() {
         {STACK.map((item) => (
           <div key={item.name} className="bg-white border border-[rgba(28,28,28,0.06)] rounded-2xl p-6">
             <div className={`${item.iconBg} size-11 rounded-[12px] flex items-center justify-center mb-6`}>
-              <img src={item.icon} alt={item.name} className="size-6 object-contain" />
+              <span className={`font-bebas text-[13px] tracking-[0.5px] ${item.initialColor}`}>{item.initial}</span>
             </div>
             <h3 className="font-bebas text-dark text-2xl tracking-[1.2px] mb-3">
               {item.name}
