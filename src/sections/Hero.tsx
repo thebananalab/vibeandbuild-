@@ -14,7 +14,7 @@ export default function Hero() {
       </nav>
 
       {/* ── Body ── */}
-      <div className="flex flex-col md:flex-row md:items-stretch md:min-h-[640px]">
+      <div className="flex flex-col md:flex-row md:items-stretch md:min-h-[720px]">
 
         {/* Text column */}
         <div className="relative md:w-[52%] flex flex-col gap-6 md:gap-0 md:justify-between px-5 sm:px-10 pt-6 md:pt-16 pb-10 md:pb-16">
@@ -33,7 +33,7 @@ export default function Hero() {
           {/* Heading */}
           <div
             className="font-bebas leading-[0.88] select-none"
-            style={{ fontSize: 'clamp(72px, 11vw, 210px)', letterSpacing: '0.02em' }}
+            style={{ fontSize: 'clamp(80px, 18vw, 320px)', letterSpacing: '0.01em' }}
           >
             <p className="text-dark mb-0">VIBE</p>
             <p className="text-purple">&amp; BLOOM</p>
